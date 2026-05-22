@@ -1,5 +1,8 @@
 node_modules
 dist
 .DS_Store
+
+# Certificate PDFs stay local / in a private repo — not in public GitHub source
+public/certificates/*.pdf
 *.local
 .env

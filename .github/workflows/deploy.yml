@@ -22,6 +22,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # PDFs are gitignored. At deploy, copy them from a private repo (see repo secrets).
+      - name: Fetch certificate PDFs (private repo)
+        if: ${{ secrets.PORTFOLIO_CERTS_REPO != '' && secrets.PORTFOLIO_CERTS_TOKEN != '' }}
+        env:
+          CERTS_REPO: ${{ secrets.PORTFOLIO_CERTS_REPO }}
+          CERTS_TOKEN: ${{ secrets.PORTFOLIO_CERTS_TOKEN }}
+        run: |
+          mkdir -p public/certificates
+          git clone --depth 1 "https://x-access-token:${CERTS_TOKEN}@github.com/${CERTS_REPO}.git" /tmp/portfolio-certs
+          cp /tmp/portfolio-certs/*.pdf public/certificates/ || true
+          ls -la public/certificates/
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
