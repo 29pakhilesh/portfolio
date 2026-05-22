@@ -1,3 +1,5 @@
+import { assetUrl } from './assetUrl'
+
 export const profile = {
   name: 'Akhilesh Panigrahi',
   title: 'B.Tech CSE Student',
@@ -6,9 +8,9 @@ export const profile = {
   email: '29p.akhilesh@gmail.com',
   phone: '+91 9873081614',
   location: 'Ghaziabad, India',
-  resumeUrl: '/Akhilesh-Panigrahi-Resume.pdf',
-  photo: '/profile-hero.png',
-  photoAbout: '/profile.png',
+  resumeUrl: assetUrl('Akhilesh-Panigrahi-Resume.pdf'),
+  photo: assetUrl('profile-hero.png'),
+  photoAbout: assetUrl('profile.png'),
   available: true,
   social: {
     github: 'https://github.com/29pakhilesh',
@@ -138,10 +140,10 @@ export const certifications = [
   {
     name: 'AWS Certified Cloud Practitioner (CLF-C02)',
     issuer: 'Udemy',
-    logo: '/icons/aws.png',
+    logo: assetUrl('icons/aws.png'),
     period: 'Feb 2026',
     skills: ['Cloud fundamentals', 'EC2', 'S3', 'IAM'],
-    certificateUrl: '/certificates/aws-cloud-practitioner.pdf',
+    certificateUrl: assetUrl('certificates/aws-cloud-practitioner.pdf'),
     downloadName: 'Akhilesh-Panigrahi-AWS-Cloud-Practitioner.pdf',
   },
   {
@@ -149,7 +151,7 @@ export const certifications = [
     issuer: 'Udemy',
     period: 'Jul 2025',
     skills: ['Python', 'OOP', 'Scripting'],
-    certificateUrl: '/certificates/python-zero-to-hero.pdf',
+    certificateUrl: assetUrl('certificates/python-zero-to-hero.pdf'),
     downloadName: 'Akhilesh-Panigrahi-Python-Bootcamp.pdf',
   },
   {
@@ -157,7 +159,7 @@ export const certifications = [
     issuer: 'Udemy',
     period: 'Sep 2025',
     skills: ['C', 'Pointers', 'Memory management'],
-    certificateUrl: '/certificates/c-programming-basics-to-advanced.pdf',
+    certificateUrl: assetUrl('certificates/c-programming-basics-to-advanced.pdf'),
     downloadName: 'Akhilesh-Panigrahi-C-Programming.pdf',
   },
   {
@@ -165,7 +167,7 @@ export const certifications = [
     issuer: 'Cisco Networking Academy',
     period: 'Jun 2025',
     skills: ['Network security', 'Threats', 'Vulnerabilities'],
-    certificateUrl: '/certificates/introduction-to-cybersecurity-cisco.pdf',
+    certificateUrl: assetUrl('certificates/introduction-to-cybersecurity-cisco.pdf'),
     downloadName: 'Akhilesh-Panigrahi-Cisco-Cybersecurity.pdf',
   },
   {
@@ -173,7 +175,7 @@ export const certifications = [
     issuer: 'OnWingspan',
     period: 'Apr 2025',
     skills: ['DSA', 'Problem solving', 'Algorithms'],
-    certificateUrl: '/certificates/data-structures-and-algorithms.pdf',
+    certificateUrl: assetUrl('certificates/data-structures-and-algorithms.pdf'),
     downloadName: 'Akhilesh-Panigrahi-DSA.pdf',
   },
 ]

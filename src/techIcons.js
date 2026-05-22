@@ -1,3 +1,5 @@
+import { assetUrl } from './assetUrl'
+
 /** Local tech icons — served from /public/icons (no CDN dependency) */
 export const techIconMap = {
   C: { src: '/icons/c.svg', label: 'C', local: true },
@@ -20,7 +22,7 @@ export const techIconMap = {
 
 export function getTechIconSources(name) {
   const src = techIconMap[name]?.src
-  return src ? [src] : []
+  return src ? [assetUrl(src)] : []
 }
 
 export function getTechIconUrl(name) {

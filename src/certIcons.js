@@ -1,3 +1,5 @@
+import { assetUrl } from './assetUrl'
+
 const SIMPLE = 'https://cdn.simpleicons.org'
 
 /** Local logos — reliable on dark backgrounds */
@@ -12,8 +14,8 @@ export const issuerIconMap = {
 }
 
 export function getCertLogoUrl(certName, issuer) {
-  if (LOCAL_LOGOS[certName]) return LOCAL_LOGOS[certName]
-  if (certName?.includes('AWS')) return LOCAL_LOGOS['AWS Cloud Practitioner']
+  if (LOCAL_LOGOS[certName]) return assetUrl(LOCAL_LOGOS[certName])
+  if (certName?.includes('AWS')) return assetUrl(LOCAL_LOGOS['AWS Cloud Practitioner'])
 
   const config = issuerIconMap[issuer]
   if (!config) return null
