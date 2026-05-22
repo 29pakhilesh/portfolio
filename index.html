@@ -1,8 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
+    <script>
+      (function () {
+        var stored = localStorage.getItem('portfolio-theme')
+        var theme =
+          stored === 'light' || stored === 'dark'
+            ? stored
+            : window.matchMedia('(prefers-color-scheme: light)').matches
+              ? 'light'
+              : 'dark'
+        document.documentElement.setAttribute('data-theme', theme)
+      })()
+    </script>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/jpeg" href="%BASE_URL%favicon-32.jpg" sizes="32x32" />
+    <link rel="icon" type="image/jpeg" href="%BASE_URL%favicon.jpg" />
+    <link rel="apple-touch-icon" href="%BASE_URL%apple-touch-icon.png" />
+    <meta name="theme-color" content="#0a1014" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"

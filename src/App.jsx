@@ -7,6 +7,7 @@ import SkillIcon from './SkillIcon'
 import { preloadTechIcons } from './techIcons'
 import CertCard from './CertCard'
 import StrengthIcon from './StrengthIcon'
+import ThemeToggle from './ThemeToggle'
 import {
   profile,
   stats,
@@ -24,7 +25,6 @@ import './App.css'
 function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
-  const initials = profile.name.split(' ').map((n) => n[0]).join('')
   const sectionIds = navLinks.map((link) => link.href.replace('#', ''))
   const activeSection = useActiveSection(sectionIds)
 
@@ -44,7 +44,6 @@ function Nav() {
       <header className={`nav ${scrolled ? 'nav--scrolled' : ''}`}>
         <div className="nav__inner">
           <a href="#" className="nav__logo" aria-label="Home">
-            <span className="nav__logo-mark">{initials}</span>
             Akhilesh
           </a>
           <ul className="nav__links">
@@ -64,22 +63,28 @@ function Nav() {
               )
             })}
           </ul>
-          <button
-            type="button"
-            className="nav__menu-btn"
-            aria-label="Open menu"
-            aria-expanded={menuOpen}
-            onClick={() => setMenuOpen(true)}
-          >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M4 7h16M4 12h16M4 17h16" />
-            </svg>
-          </button>
+          <div className="nav__actions">
+            <ThemeToggle />
+            <button
+              type="button"
+              className="nav__menu-btn"
+              aria-label="Open menu"
+              aria-expanded={menuOpen}
+              onClick={() => setMenuOpen(true)}
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M4 7h16M4 12h16M4 17h16" />
+              </svg>
+            </button>
+          </div>
         </div>
       </header>
 
       <nav className={`mobile-nav ${menuOpen ? 'mobile-nav--open' : ''}`} aria-hidden={!menuOpen}>
-        <button type="button" className="mobile-nav__close" aria-label="Close" onClick={() => setMenuOpen(false)}>✕</button>
+        <div className="mobile-nav__top">
+          <ThemeToggle />
+          <button type="button" className="mobile-nav__close" aria-label="Close" onClick={() => setMenuOpen(false)}>✕</button>
+        </div>
         {navLinks.map((link) => {
           const id = link.href.replace('#', '')
           const isActive = activeSection === id

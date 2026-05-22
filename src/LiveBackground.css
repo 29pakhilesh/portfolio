@@ -11,11 +11,30 @@
 .live-bg__base {
   position: absolute;
   inset: 0;
+  opacity: var(--live-bg-strength, 1);
   background:
-    radial-gradient(ellipse 95% 60% at 15% -5%, rgba(212, 175, 55, 0.09), transparent 58%),
-    radial-gradient(ellipse 75% 50% at 90% 18%, rgba(184, 150, 46, 0.06), transparent 52%),
-    radial-gradient(ellipse 65% 45% at 48% 102%, rgba(154, 123, 26, 0.05), transparent 48%);
+    radial-gradient(
+      circle 42vmin at var(--mouse-x, 50%) var(--mouse-y, 40%),
+      rgba(var(--accent-rgb), 0.14),
+      transparent 68%
+    ),
+    radial-gradient(ellipse 95% 60% at 15% -5%, rgba(var(--accent-rgb), 0.06), transparent 58%),
+    radial-gradient(ellipse 75% 50% at 90% 18%, rgba(100, 116, 139, 0.05), transparent 52%),
+    radial-gradient(ellipse 65% 45% at 48% 102%, rgba(var(--accent-deep-rgb), 0.04), transparent 48%);
   animation: liveBgBasePulse 20s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  transition: opacity 0.5s var(--ease-out);
+}
+
+[data-theme='light'] .live-bg__base {
+  background:
+    radial-gradient(
+      circle 42vmin at var(--mouse-x, 50%) var(--mouse-y, 40%),
+      rgba(var(--accent-rgb), 0.1),
+      transparent 68%
+    ),
+    radial-gradient(ellipse 95% 60% at 15% -5%, rgba(var(--accent-rgb), 0.05), transparent 58%),
+    radial-gradient(ellipse 75% 50% at 90% 18%, rgba(100, 116, 139, 0.04), transparent 52%),
+    radial-gradient(ellipse 65% 45% at 48% 102%, rgba(var(--accent-deep-rgb), 0.03), transparent 48%);
 }
 
 .live-bg__orb {
@@ -24,6 +43,8 @@
   filter: blur(96px);
   will-change: transform;
   transform: translate3d(0, 0, 0);
+  opacity: var(--live-bg-strength, 1);
+  transition: opacity 0.5s var(--ease-out);
 }
 
 .live-bg__orb--1 {
@@ -31,7 +52,7 @@
   height: min(50vw, 480px);
   top: -14%;
   left: -6%;
-  background: radial-gradient(circle, rgba(212, 175, 55, 0.22) 0%, transparent 72%);
+  background: radial-gradient(circle, rgba(var(--accent-rgb), 0.14) 0%, transparent 72%);
   animation: liveBgDrift1 36s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
 }
 
@@ -40,7 +61,7 @@
   height: min(42vw, 400px);
   top: 38%;
   right: -8%;
-  background: radial-gradient(circle, rgba(240, 215, 140, 0.14) 0%, transparent 72%);
+  background: radial-gradient(circle, rgba(148, 163, 184, 0.12) 0%, transparent 72%);
   animation: liveBgDrift2 42s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
 }
 
@@ -49,27 +70,49 @@
   height: min(38vw, 360px);
   bottom: 8%;
   left: 22%;
-  background: radial-gradient(circle, rgba(184, 150, 46, 0.16) 0%, transparent 72%);
+  background: radial-gradient(circle, rgba(var(--accent-deep-rgb), 0.1) 0%, transparent 72%);
   animation: liveBgDrift3 38s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
-  opacity: calc(0.65 + var(--scroll-progress, 0) * 0.35);
+  opacity: calc((0.55 + var(--scroll-progress, 0) * 0.25) * var(--live-bg-strength, 1));
+}
+
+[data-theme='light'] .live-bg__orb--1 {
+  background: radial-gradient(circle, rgba(var(--accent-rgb), 0.09) 0%, transparent 72%);
+}
+
+[data-theme='light'] .live-bg__orb--2 {
+  background: radial-gradient(circle, rgba(148, 163, 184, 0.1) 0%, transparent 72%);
+}
+
+[data-theme='light'] .live-bg__orb--3 {
+  background: radial-gradient(circle, rgba(var(--accent-deep-rgb), 0.07) 0%, transparent 72%);
 }
 
 .live-bg__spotlight {
   position: absolute;
   top: 0;
   left: 0;
-  width: min(72vw, 620px);
-  height: min(72vw, 620px);
+  width: min(58vw, 540px);
+  height: min(58vw, 540px);
   border-radius: 50%;
+  opacity: var(--spotlight-strength, 1);
   background: radial-gradient(
     circle,
-    rgba(212, 175, 55, 0.1) 0%,
-    rgba(212, 175, 55, 0.035) 42%,
+    rgba(var(--accent-rgb), 0.18) 0%,
+    rgba(var(--accent-rgb), 0.06) 38%,
     transparent 72%
   );
-  filter: blur(48px);
+  filter: blur(44px);
   will-change: transform;
   transform: translate3d(50vw, 38vh, 0) translate(-50%, -50%);
+}
+
+[data-theme='light'] .live-bg__spotlight {
+  background: radial-gradient(
+    circle,
+    rgba(var(--accent-rgb), 0.12) 0%,
+    rgba(var(--accent-rgb), 0.04) 38%,
+    transparent 72%
+  );
 }
 
 @keyframes liveBgFadeIn {
@@ -78,8 +121,8 @@
 }
 
 @keyframes liveBgBasePulse {
-  0% { opacity: 0.92; transform: scale(1); }
-  100% { opacity: 1; transform: scale(1.02); }
+  0% { opacity: calc(0.88 * var(--live-bg-strength, 1)); transform: scale(1); }
+  100% { opacity: var(--live-bg-strength, 1); transform: scale(1.02); }
 }
 
 @keyframes liveBgDrift1 {

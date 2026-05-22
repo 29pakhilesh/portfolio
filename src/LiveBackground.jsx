@@ -10,6 +10,9 @@ export default function LiveBackground() {
     const root = document.documentElement
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
+    root.style.setProperty('--mouse-x', '50%')
+    root.style.setProperty('--mouse-y', '40%')
+
     let targetX = window.innerWidth * 0.5
     let targetY = window.innerHeight * 0.38
     let currentX = targetX
@@ -41,6 +44,10 @@ export default function LiveBackground() {
         spotlight.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%)`
       }
 
+      const mouseX = (currentX / window.innerWidth) * 100
+      const mouseY = (currentY / window.innerHeight) * 100
+      root.style.setProperty('--mouse-x', `${mouseX}%`)
+      root.style.setProperty('--mouse-y', `${mouseY}%`)
       root.style.setProperty('--scroll-progress', String(scrollCurrent))
       rafId = requestAnimationFrame(tick)
     }
