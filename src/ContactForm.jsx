@@ -67,7 +67,9 @@ export default function ContactForm() {
             </p>
             <div className="message-section__hints">
               <span>✦ Usually reply within 24h</span>
-              <span>✦ Open to internships & collabs</span>
+              {profile.available ? (
+                <span>✦ {profile.availabilityLabel}</span>
+              ) : null}
             </div>
           </div>
 

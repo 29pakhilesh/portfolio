@@ -12,6 +12,8 @@ export const profile = {
   resumeDownloadName: 'Akhilesh-Panigrahi-Resume.pdf',
   photoAbout: assetUrl('profile.png'),
   available: true,
+  availabilityLabel: 'Available',
+  availabilityMessage: 'Open for internships and project collaborations',
   social: {
     github: 'https://github.com/29pakhilesh',
     linkedin: 'https://www.linkedin.com/in/akhileshpanigrahi/',

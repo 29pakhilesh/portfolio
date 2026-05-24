@@ -7,6 +7,7 @@ import SkillIcon from './SkillIcon'
 import { preloadTechIcons } from './techIcons'
 import CertCard from './CertCard'
 import ResumePreviewButton from './ResumePreviewButton'
+import AvailabilityStatus from './AvailabilityStatus'
 import SkillDetailModal from './SkillDetailModal'
 import ProjectDetailModal from './ProjectDetailModal'
 import StrengthIcon from './StrengthIcon'
@@ -134,12 +135,6 @@ function Hero() {
       <div className="hero__grid-lines" aria-hidden="true" />
       <div className="container hero__content">
         <div className="hero__main">
-          {profile.available && (
-            <p className="hero__badge">
-              <span className="hero__badge-dot" />
-              Open for internships & collaborations
-            </p>
-          )}
           <h1 className="hero__title">
             Hi, I&apos;m <span className="gradient-text">{first}</span>
             <br />
@@ -233,6 +228,7 @@ function About() {
                   </div>
                 ))}
               </div>
+              <AvailabilityStatus />
             </div>
           </div>
         </SectionReveal>
