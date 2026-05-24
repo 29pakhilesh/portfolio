@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import CertificatePreviewModal from './CertificatePreviewModal'
+import PdfPreviewModal from './PdfPreviewModal'
 import { getCertLogoUrl } from './certIcons'
 
 export default function CertCard({ cert }) {
@@ -72,7 +72,13 @@ export default function CertCard({ cert }) {
       </article>
 
       {previewOpen && (
-        <CertificatePreviewModal cert={cert} onClose={() => setPreviewOpen(false)} />
+        <PdfPreviewModal
+          pdfUrl={cert.certificateUrl}
+          title={cert.name}
+          meta={`${cert.issuer} · ${cert.period}`}
+          downloadName={cert.downloadName}
+          onClose={() => setPreviewOpen(false)}
+        />
       )}
     </>
   )

@@ -134,7 +134,6 @@ body::-webkit-scrollbar {
   height: 0;
 }
 
-/* Hide scrollbars site-wide; scrolling still works via wheel / trackpad / touch */
 * {
   scrollbar-width: none;
   -ms-overflow-style: none;

@@ -12,7 +12,6 @@ export default function SkillDetailModal({ techName, onClose }) {
     }
     document.addEventListener('keydown', onKey)
     document.body.style.overflow = 'hidden'
-    // Avoid default blue focus ring on open; Escape still works via document listener
 
     return () => {
       document.removeEventListener('keydown', onKey)

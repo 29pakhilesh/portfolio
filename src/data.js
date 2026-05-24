@@ -10,7 +10,6 @@ export const profile = {
   location: 'Ghaziabad, India',
   resumeUrl: assetUrl('Akhilesh-Panigrahi-Resume.pdf'),
   resumeDownloadName: 'Akhilesh-Panigrahi-Resume.pdf',
-  photo: assetUrl('profile-hero.png'),
   photoAbout: assetUrl('profile.png'),
   available: true,
   social: {
@@ -54,7 +53,6 @@ export const skillPills = [
   'Express', 'Next.js', 'MySQL', 'HTML', 'CSS', 'Git', 'Linux', 'AWS',
 ]
 
-/** Click-to-open detail for each tech tile in the skills grid */
 export const techDetails = {
   C: {
     category: 'Languages',

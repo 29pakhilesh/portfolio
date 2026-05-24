@@ -16,7 +16,6 @@
   margin-inline: auto;
 }
 
-/* ── Nav ── */
 .nav {
   position: fixed;
   top: 0;
@@ -138,7 +137,6 @@
   padding: 0.55rem;
 }
 
-/* ── Theme toggle (segmented switch) ── */
 .theme-toggle {
   position: relative;
   display: grid;
@@ -234,7 +232,6 @@
   }
 }
 
-/* ── Hero ── */
 .hero {
   min-height: 100vh;
   display: flex;
@@ -484,7 +481,6 @@
   animation: spin 0.7s linear infinite;
 }
 
-/* Stats */
 .hero__stats {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -554,12 +550,10 @@
   color: var(--text-muted);
 }
 
-/* ── Sections ── */
 .section {
   padding: var(--space-section) 0;
   position: relative;
 }
-
 
 .section__number {
   font-size: 0.72rem;
@@ -585,7 +579,6 @@
   margin-bottom: 2.75rem;
 }
 
-/* ── About ── */
 .about__grid {
   display: grid;
   grid-template-columns: minmax(280px, 0.95fr) 1.35fr;
@@ -765,7 +758,6 @@
   opacity: 0.85;
 }
 
-/* ── Projects grid (2 × 4) ── */
 .projects-bento {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -923,7 +915,6 @@
   color: var(--text-muted);
 }
 
-/* ── Skills marquee ── */
 .skills-marquee {
   overflow: hidden;
   margin-bottom: 3rem;
@@ -1078,7 +1069,6 @@
   min-height: 0;
 }
 
-/* Tech icon tile */
 .skill-icon {
   display: flex;
   flex-direction: column;
@@ -1156,7 +1146,6 @@
   color: var(--accent-3);
 }
 
-/* Skill detail popup */
 .skill-modal {
   position: fixed;
   top: 0;
@@ -1353,7 +1342,6 @@
   }
 }
 
-/* Project detail popup */
 .project-modal__panel {
   width: min(100%, 34rem);
   max-height: min(90dvh, 38rem);
@@ -1539,7 +1527,6 @@
   border-radius: 10px;
 }
 
-/* Certifications & strengths */
 .certs-block {
   margin-top: 3.5rem;
   padding-top: 3rem;
@@ -1783,7 +1770,6 @@
   flex-shrink: 0;
 }
 
-/* Certificate PDF preview */
 .cert-preview-modal__panel {
   width: min(100%, 44rem);
   max-height: min(92dvh, 44rem);
@@ -1834,7 +1820,6 @@
   min-width: 6rem;
 }
 
-/* Strengths */
 .strengths {
   margin-top: 2.5rem;
   padding: 2rem;
@@ -1906,7 +1891,6 @@
   color: var(--text);
 }
 
-/* ── Contact (form + direct links) ── */
 .message-section {
   padding: 2.5rem 0 4rem;
   position: relative;
@@ -2111,7 +2095,6 @@
   color: var(--error);
 }
 
-/* ── Footer ── */
 .footer {
   padding: 2rem 0 2.5rem;
   border-top: 1px solid var(--border);
@@ -2122,7 +2105,6 @@
   color: var(--text-muted);
 }
 
-/* ── Reveal (appear on scroll in, disappear on scroll out) ── */
 .section-reveal {
   width: 100%;
 }
@@ -2176,7 +2158,6 @@
   }
 }
 
-/* ── Mobile nav ── */
 .mobile-nav {
   position: fixed;
   inset: 0;
@@ -2234,7 +2215,6 @@
   padding: 0.55rem 0.75rem;
 }
 
-/* ── Keyframes ── */
 @keyframes appFadeIn {
   from {
     opacity: 0;
@@ -2268,7 +2248,6 @@
   to { transform: rotate(360deg); }
 }
 
-/* ── Responsive ── */
 @media (max-width: 960px) {
   .nav__links { display: none; }
   .nav__menu-btn {

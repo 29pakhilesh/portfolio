@@ -2,7 +2,6 @@ import { assetUrl } from './assetUrl'
 
 const SIMPLE = 'https://cdn.simpleicons.org'
 
-/** Local logos — reliable on dark backgrounds */
 const LOCAL_LOGOS = {
   'AWS Cloud Practitioner': '/icons/aws.png',
 }

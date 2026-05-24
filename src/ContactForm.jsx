@@ -6,7 +6,7 @@ const ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY
 
 export default function ContactForm() {
   const [form, setForm] = useState({ name: '', email: '', message: '' })
-  const [status, setStatus] = useState('idle') // idle | loading | success | error
+  const [status, setStatus] = useState('idle')
 
   const handleChange = (e) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))

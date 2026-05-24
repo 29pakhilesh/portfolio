@@ -1,6 +1,5 @@
 import { assetUrl } from './assetUrl'
 
-/** Local tech icons — served from /public/icons (no CDN dependency) */
 export const techIconMap = {
   C: { src: '/icons/c.svg', label: 'C', local: true },
   'C++': { src: '/icons/cplusplus.svg', label: 'C++', local: true, monochrome: true },
@@ -47,7 +46,6 @@ export function getTechLabel(name) {
   return techIconMap[name]?.label ?? name
 }
 
-/** Map project tags to an icon name when the tag label differs */
 const tagIconAliases = {
   Web: 'HTML',
 }

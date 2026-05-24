@@ -1,4 +1,3 @@
-# Deploy Vite build to GitHub Pages (Settings → Pages → Source: GitHub Actions)
 name: Deploy to GitHub Pages
 
 on:
@@ -22,7 +21,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # PDFs are gitignored. Optional: set PORTFOLIO_CERTS_REPO + PORTFOLIO_CERTS_TOKEN secrets.
       - name: Fetch certificate PDFs (private repo)
         env:
           CERTS_REPO: ${{ secrets.PORTFOLIO_CERTS_REPO }}
@@ -49,7 +47,6 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          # Project site URL: https://<user>.github.io/<repo>/
           VITE_BASE_PATH: /${{ github.event.repository.name }}/
           VITE_WEB3FORMS_ACCESS_KEY: ${{ secrets.VITE_WEB3FORMS_ACCESS_KEY }}
 

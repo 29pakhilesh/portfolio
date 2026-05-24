@@ -58,7 +58,6 @@ export function useScrollReveal(options) {
   return ref
 }
 
-/** One reveal animation for an entire section block */
 export function SectionReveal({ children, className = '' }) {
   const ref = useRef(null)
   useBidirectionalReveal(ref, { threshold: 0.06, rootMargin: '0px 0px -6% 0px', mode: 'single' })
@@ -70,7 +69,6 @@ export function SectionReveal({ children, className = '' }) {
   )
 }
 
-/** Reveal each child on its own, all triggered together when the group enters view */
 export function RevealGroup({ children, className = '' }) {
   const ref = useRef(null)
   useBidirectionalReveal(ref, { threshold: 0.08, rootMargin: '0px 0px -8% 0px', mode: 'group' })
