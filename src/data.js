@@ -2,9 +2,9 @@ import { assetUrl } from './assetUrl'
 
 export const profile = {
   name: 'Akhilesh Panigrahi',
-  title: 'B.Tech CSE Student',
+  title: 'B.Tech CSE Student · Summer Intern @ HSC',
   tagline:
-    'Third-year Computer Science student at JUIT — building web apps, browser-based systems, and scalable software. Open to internships.',
+    'Third-year Computer Science student at JUIT and Summer Intern at Hughes Systique Corporation — building web apps, browser-based systems, and scalable software.',
   email: '29p.akhilesh@gmail.com',
   phone: '+91 9873081614',
   location: 'Ghaziabad, India',
@@ -30,17 +30,62 @@ export const stats = [
 
 export const about = [
   "I'm a B.Tech Computer Science student at Jaypee University of Information Technology, passionate about software development and problem solving.",
+  'Currently a Summer Intern at Hughes Systique Corporation (HSC), working in a hybrid role from Gurugram.',
   'I build real-world systems — from a browser-based OS simulation to hostel complaint platforms with role-based dashboards and PostgreSQL backends.',
   'Certified in AWS Cloud, Python, C, DSA, and Cybersecurity. Active on LeetCode and always learning new tools to ship better software.',
 ]
 
-export const education = [
+export const experience = [
   {
-    degree: 'B.Tech, Computer Science & Engineering',
-    school: 'Jaypee University of Information Technology',
+    organization: 'Cambridge School Indirapuram',
+    role: 'Secondary Education',
+    location: 'Indirapuram, Ghaziabad',
+    period: '',
+    detail: '',
+    kind: 'education',
+    logo: assetUrl('logos/cambridge-school.png'),
+    summary:
+      'Completed schooling at Cambridge School Indirapuram, a CBSE-affiliated institution in Ghaziabad — building the academic foundation for engineering and computer science.',
+    highlights: [
+      'Strong base in mathematics, science, and analytical thinking',
+      'Participated in school-level academic and co-curricular activities',
+      'Developed discipline and study habits that carried into university',
+    ],
+    website: 'https://ip.cambridgeschool.edu.in/',
+  },
+  {
+    organization: 'Jaypee University of Information Technology',
+    role: 'B.Tech, Computer Science & Engineering',
     location: 'Wakhnaghat, Solan',
     period: '2024 — 2028',
     detail: 'Relevant coursework: DSA, DBMS, Web Development',
+    kind: 'education',
+    logo: assetUrl('logos/juit.png'),
+    summary:
+      'Pursuing B.Tech in Computer Science & Engineering at JUIT — focused on data structures, databases, web development, and building real-world software projects alongside coursework.',
+    highlights: [
+      'Coursework in DSA, DBMS, and Web Development',
+      'Built multiple full-stack and systems projects alongside academics',
+      'Active in problem solving through LeetCode and university assignments',
+    ],
+    website: 'https://www.juit.ac.in/',
+  },
+  {
+    organization: 'Hughes Systique Corporation (HSC)',
+    role: 'Summer Intern',
+    location: 'Gurugram, Haryana, India',
+    period: 'May 2026 — Present',
+    detail: 'Internship · Hybrid',
+    kind: 'internship',
+    logo: assetUrl('logos/hsc.png'),
+    summary:
+      'Summer intern at Hughes Systique Corporation — a global software R&D and digital transformation company with development centers in Gurugram and Bengaluru.',
+    highlights: [
+      'Hybrid internship based in Gurugram, Haryana',
+      'Exposure to enterprise software development and engineering workflows',
+      'Working within a CMMI Level 5 certified global technology organization',
+    ],
+    website: 'https://www.hsc.com/',
   },
 ]
 
@@ -281,6 +326,7 @@ export function getTechDetail(techName) {
       project: p.title,
       context: p.description,
       github: p.github,
+      url: p.url,
     }))
 
   const category =
@@ -297,7 +343,7 @@ export const projects = [
   {
     title: 'Hostel Complaint Management System',
     description:
-      'Web platform for students to submit and track hostel complaints with role-based dashboards (student/admin) and real-time updates.',
+      'Web platform for students to submit and track hostel complaints with role-based dashboards and real-time updates.',
     highlights: [
       'Student and admin dashboards with separate workflows',
       'REST API with Express and PostgreSQL persistence',
@@ -305,14 +351,15 @@ export const projects = [
     ],
     tags: ['React', 'Node.js', 'Express', 'PostgreSQL'],
     period: 'Feb 2026 — Apr 2026',
-    accent: '#d4af37',
+    accent: '#5b8def',
     featured: true,
+    url: 'https://hostel-complaint-system-opal.vercel.app',
     github: 'https://github.com/29pakhilesh/Hostel-Complaint-System',
   },
   {
     title: 'WebUnix — Browser-Based OS',
     description:
-      'Browser-based OS with multi-application desktop interface, LocalStorage file system, auth, and persistent sessions.',
+      'Browser-based OS with multi-app desktop, LocalStorage file system, auth, and persistent sessions.',
     highlights: [
       'Desktop-style UI with draggable windows and app launcher',
       'LocalStorage-backed virtual file system',
@@ -320,14 +367,15 @@ export const projects = [
     ],
     tags: ['HTML', 'CSS', 'JavaScript', 'LocalStorage'],
     period: 'Dec 2025',
-    accent: '#d4af37',
+    accent: '#5b8def',
     featured: true,
+    url: '',
     github: 'https://github.com/29pakhilesh/Webunix',
   },
   {
     title: 'Online Quiz System',
     description:
-      'Web-based quiz platform with login, MCQ tests, automated scoring, and question management — reducing manual evaluation.',
+      'Quiz platform with login, MCQ tests, automated scoring, and question management for instructors.',
     highlights: [
       'User authentication and role-based quiz access',
       'MCQ test engine with automated scoring',
@@ -335,14 +383,15 @@ export const projects = [
     ],
     tags: ['Web', 'Auth', 'MCQ Engine'],
     period: 'Mar 2026',
-    accent: '#d4af37',
+    accent: '#5b8def',
     featured: false,
+    url: 'https://online-quiz-system-l94i.onrender.com',
     github: 'https://github.com/29pakhilesh/Online-Quiz-System',
   },
   {
     title: 'Green Computing Dashboard',
     description:
-      'Dashboard to visualize energy and resource usage in computing systems with performance monitoring insights.',
+      'Dashboard to visualize energy and resource usage in computing systems with performance monitoring.',
     highlights: [
       'Charts for CPU, memory, and energy-style metrics',
       'React-based UI for monitoring resource trends',
@@ -350,14 +399,15 @@ export const projects = [
     ],
     tags: ['React', 'Data Viz', 'Sustainability'],
     period: 'Mar 2026',
-    accent: '#d4af37',
+    accent: '#5b8def',
     featured: false,
+    url: 'https://green-computing-dashboard-mu.vercel.app',
     github: 'https://github.com/29pakhilesh/Green-Computing-Dashboard',
   },
   {
     title: 'Parking Management System',
     description:
-      'C++ system for vehicle entry/exit, GST-based billing, file handling, and automated record management.',
+      'C++ system for vehicle entry/exit, GST-based billing, file handling, and automated records.',
     highlights: [
       'Vehicle entry/exit logging with slot management',
       'GST-based billing and receipt generation',
@@ -365,14 +415,15 @@ export const projects = [
     ],
     tags: ['C++', 'File I/O', 'Billing'],
     period: 'Nov 2025',
-    accent: '#d4af37',
+    accent: '#5b8def',
     featured: false,
+    url: '',
     github: 'https://github.com/29pakhilesh/Multi-Vehicle-Parking-Management-System',
   },
   {
     title: 'PDF Merger & Splitter',
     description:
-      'Python tool using PyPDF2 to merge multiple PDFs and split documents — automating document handling workflows.',
+      'Python tool using PyPDF2 to merge multiple PDFs and split documents for batch workflows.',
     highlights: [
       'Merge multiple PDFs into a single file',
       'Split PDFs by page ranges',
@@ -380,14 +431,15 @@ export const projects = [
     ],
     tags: ['Python', 'PyPDF2', 'Automation'],
     period: 'Jun — Jul 2025',
-    accent: '#d4af37',
+    accent: '#5b8def',
     featured: false,
+    url: '',
     github: 'https://github.com/29pakhilesh/splitter-merger-tool-for-pdfs',
   },
   {
     title: 'Traffic Sign Recognition',
     description:
-      'Deep learning web app with ResNet18 CNN to classify traffic signs from images and live webcam — built with PyTorch and FastAPI.',
+      'Deep learning app with ResNet18 to classify traffic signs from images and live webcam feed.',
     highlights: [
       'ResNet18 model trained for traffic sign classes',
       'Image upload and live webcam inference',
@@ -395,14 +447,15 @@ export const projects = [
     ],
     tags: ['Python', 'PyTorch', 'FastAPI', 'Deep Learning'],
     period: 'May 2026',
-    accent: '#d4af37',
+    accent: '#5b8def',
     featured: false,
+    url: '',
     github: 'https://github.com/29pakhilesh/Traffic-Sign-Recognition',
   },
   {
     title: 'Automated Resume Scoring System',
     description:
-      'Full-stack app that scores resumes against a job description with semantic similarity, keyword coverage, and actionable feedback.',
+      'Full-stack app that scores resumes against a job description with semantic similarity and feedback.',
     highlights: [
       'Resume–JD semantic similarity scoring',
       'Keyword coverage and gap analysis',
@@ -410,8 +463,9 @@ export const projects = [
     ],
     tags: ['React', 'TypeScript', 'FastAPI', 'SQLite'],
     period: 'Apr — May 2026',
-    accent: '#d4af37',
+    accent: '#5b8def',
     featured: false,
+    url: '',
     github: 'https://github.com/29pakhilesh/Automated-Resume-Scoring-System',
   },
 ]
@@ -469,6 +523,7 @@ export const strengths = [
 
 export const navLinks = [
   { href: '#about', label: 'About' },
+  { href: '#experience', label: 'Experience' },
   { href: '#work', label: 'Projects' },
   { href: '#skills', label: 'Skills' },
   { href: '#contact', label: 'Contact' },

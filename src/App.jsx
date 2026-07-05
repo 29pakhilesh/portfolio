@@ -9,6 +9,7 @@ import CertCard from './CertCard'
 import ResumePreviewButton from './ResumePreviewButton'
 import AvailabilityStatus from './AvailabilityStatus'
 import SkillDetailModal from './SkillDetailModal'
+import ExperienceDetailModal from './ExperienceDetailModal'
 import ProjectDetailModal from './ProjectDetailModal'
 import StrengthIcon from './StrengthIcon'
 import ThemeToggle from './ThemeToggle'
@@ -16,7 +17,7 @@ import {
   profile,
   stats,
   about,
-  education,
+  experience,
   skills,
   skillPills,
   projects,
@@ -216,18 +217,6 @@ function About() {
               {about.map((p, i) => (
                 <p key={i}>{p}</p>
               ))}
-              <div className="about__education">
-                {education.map((edu) => (
-                  <div key={edu.school} className="edu-card">
-                    <span className="edu-card__period">{edu.period}</span>
-                    <h4>{edu.degree}</h4>
-                    <p className="edu-card__school">
-                      {edu.school} · {edu.location}
-                    </p>
-                    <p className="edu-card__detail">{edu.detail}</p>
-                  </div>
-                ))}
-              </div>
               <AvailabilityStatus />
             </div>
           </div>
@@ -237,28 +226,177 @@ function About() {
   )
 }
 
-function ProjectCard({ project, onSelect }) {
+const experienceGroups = [
+  {
+    id: 'education',
+    label: 'Education',
+    items: experience.filter((item) => item.kind === 'education'),
+  },
+  {
+    id: 'work',
+    label: 'Work & Internships',
+    items: experience.filter((item) => item.kind !== 'education'),
+  },
+]
+
+const experienceTypeLabels = {
+  education: 'Education',
+  internship: 'Internship',
+  job: 'Job',
+}
+
+function ExperienceCard({ item, onSelect }) {
+  const typeLabel = experienceTypeLabels[item.kind] ?? item.kind
+
   return (
     <button
       type="button"
-      className={`project-card ${project.featured ? 'project-card--featured' : ''}`}
-      style={{ '--project-accent': project.accent }}
-      onClick={() => onSelect(project)}
-      aria-label={`View details for ${project.title}`}
+      className={`experience-card experience-card--${item.kind}`}
+      onClick={() => onSelect(item)}
+      aria-label={`View details for ${item.organization}`}
     >
-      <div className="project-card__accent-bar" />
-      <span className="project-card__period">{project.period}</span>
-      <h3>
-        {project.title}
-        <span className="project-card__arrow" aria-hidden="true"> +</span>
-      </h3>
-      <p>{project.description}</p>
-      <div className="project-card__tags">
-        {project.tags.map((tag) => (
-          <span key={tag} className="project-card__tag">{tag}</span>
-        ))}
+      <div className="experience-card__body">
+        <div className="experience-card__header">
+          <div className="experience-card__logo-wrap">
+            <img
+              src={item.logo}
+              alt=""
+              className="experience-card__logo"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div className="experience-card__content">
+            <div className="experience-card__meta">
+              <span className={`experience-card__type experience-card__type--${item.kind}`}>
+                {typeLabel}
+              </span>
+              {item.period ? (
+                <span className="experience-card__period">{item.period}</span>
+              ) : null}
+            </div>
+            <h3 className="experience-card__org">
+              {item.organization}
+              <span className="experience-card__arrow" aria-hidden="true"> +</span>
+            </h3>
+            <p className="experience-card__role">{item.role}</p>
+            <p className="experience-card__location">{item.location}</p>
+          </div>
+        </div>
       </div>
     </button>
+  )
+}
+
+function Experience() {
+  const [selectedExperience, setSelectedExperience] = useState(null)
+
+  return (
+    <section id="experience" className="section">
+      <div className="container">
+        <SectionReveal>
+          <div className="section__header">
+            <p className="section__number">02 — Experience</p>
+            <h2 className="section__title">Where I&apos;ve studied & worked</h2>
+          </div>
+          <div className="experience-groups">
+            {experienceGroups.map((group) =>
+              group.items.length > 0 ? (
+                <div key={group.id} className={`experience-group experience-group--${group.id}`}>
+                  <h3 className="experience-group__title">{group.label}</h3>
+                  <div className="experience-timeline">
+                    {group.items.map((item) => (
+                      <ExperienceCard
+                        key={item.organization}
+                        item={item}
+                        onSelect={setSelectedExperience}
+                      />
+                    ))}
+                  </div>
+                </div>
+              ) : null,
+            )}
+          </div>
+        </SectionReveal>
+      </div>
+      {selectedExperience && (
+        <ExperienceDetailModal
+          item={selectedExperience}
+          onClose={() => setSelectedExperience(null)}
+        />
+      )}
+    </section>
+  )
+}
+
+function ProjectCard({ project, onSelect }) {
+  const openDetails = () => onSelect(project)
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault()
+      openDetails()
+    }
+  }
+
+  const stopNav = (e) => {
+    e.stopPropagation()
+  }
+
+  return (
+    <article
+      className={`project-card ${project.featured ? 'project-card--featured' : ''}`}
+      style={{ '--project-accent': project.accent }}
+    >
+      <div
+        className="project-card__main"
+        role="button"
+        tabIndex={0}
+        onClick={openDetails}
+        onKeyDown={handleKeyDown}
+        aria-label={`View details for ${project.title}`}
+      >
+        <div className="project-card__accent-bar" />
+        <span className="project-card__period">{project.period}</span>
+        <h3>
+          {project.title}
+          <span className="project-card__arrow" aria-hidden="true"> +</span>
+        </h3>
+        <p>{project.description}</p>
+        <div className="project-card__tags">
+          {project.tags.map((tag) => (
+            <span key={tag} className="project-card__tag">{tag}</span>
+          ))}
+        </div>
+      </div>
+
+      {(project.url || project.github) && (
+        <div className="project-card__links">
+          {project.url && (
+            <a
+              href={project.url}
+              className="project-card__link"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={stopNav}
+            >
+              Live site <span aria-hidden="true">↗</span>
+            </a>
+          )}
+          {project.github && (
+            <a
+              href={project.github}
+              className="project-card__link"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={stopNav}
+            >
+              GitHub <span aria-hidden="true">↗</span>
+            </a>
+          )}
+        </div>
+      )}
+    </article>
   )
 }
 
@@ -270,7 +408,7 @@ function Work() {
       <div className="container">
         <RevealGroup className="work-reveal">
           <RevealItem className="section__header">
-            <p className="section__number">02 — Projects</p>
+            <p className="section__number">03 — Projects</p>
             <h2 className="section__title">Things I&apos;ve built</h2>
           </RevealItem>
           <div className="projects-bento">
@@ -306,7 +444,7 @@ function Skills() {
       <div className="container">
         <SectionReveal>
           <div className="section__header">
-            <p className="section__number">03 — Skills</p>
+            <p className="section__number">04 — Skills</p>
             <h2 className="section__title">Tech stack & certs</h2>
           </div>
 
@@ -392,6 +530,7 @@ export default function App() {
       <main>
         <Hero />
         <About />
+        <Experience />
         <Work />
         <Skills />
         <ContactForm />

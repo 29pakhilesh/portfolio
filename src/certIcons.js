@@ -1,23 +1,18 @@
 import { assetUrl } from './assetUrl'
 
-const SIMPLE = 'https://cdn.simpleicons.org'
-
-const LOCAL_LOGOS = {
-  'AWS Cloud Practitioner': '/icons/aws.png',
+const LOCAL_ISSUER_LOGOS = {
+  Udemy: 'icons/udemy.svg',
+  'Cisco Networking Academy': 'icons/cisco.svg',
+  OnWingspan: 'icons/onwingspan.svg',
 }
 
-export const issuerIconMap = {
-  Udemy: { slug: 'udemy', color: 'A435F0' },
-  'Cisco Networking Academy': { slug: 'cisco' },
-  OnWingspan: { slug: 'googlecloud', color: '4285F4' },
+const LOCAL_CERT_LOGOS = {
+  'AWS Cloud Practitioner': 'icons/aws.png',
 }
 
 export function getCertLogoUrl(certName, issuer) {
-  if (LOCAL_LOGOS[certName]) return assetUrl(LOCAL_LOGOS[certName])
-  if (certName?.includes('AWS')) return assetUrl(LOCAL_LOGOS['AWS Cloud Practitioner'])
-
-  const config = issuerIconMap[issuer]
-  if (!config) return null
-  const path = config.color ? `${config.slug}/${config.color}` : config.slug
-  return `${SIMPLE}/${path}`
+  if (LOCAL_CERT_LOGOS[certName]) return assetUrl(LOCAL_CERT_LOGOS[certName])
+  if (certName?.includes('AWS')) return assetUrl(LOCAL_CERT_LOGOS['AWS Cloud Practitioner'])
+  if (issuer && LOCAL_ISSUER_LOGOS[issuer]) return assetUrl(LOCAL_ISSUER_LOGOS[issuer])
+  return null
 }

@@ -4,6 +4,7 @@ import { getCertLogoUrl } from './certIcons'
 
 export default function CertCard({ cert }) {
   const [previewOpen, setPreviewOpen] = useState(false)
+  const [logoFailed, setLogoFailed] = useState(false)
   const logoUrl = cert.logo ?? getCertLogoUrl(cert.name, cert.issuer)
   const tags = Array.isArray(cert.skills) ? cert.skills : cert.skills.split(', ')
 
@@ -17,8 +18,16 @@ export default function CertCard({ cert }) {
               cert.name.includes('AWS') ? ' cert-card__logo-wrap--aws' : ''
             }`}
           >
-            {logoUrl ? (
-              <img src={logoUrl} alt="" className="cert-card__logo" width={44} height={44} loading="lazy" />
+            {logoUrl && !logoFailed ? (
+              <img
+                src={logoUrl}
+                alt=""
+                className="cert-card__logo"
+                width={44}
+                height={44}
+                loading="lazy"
+                onError={() => setLogoFailed(true)}
+              />
             ) : (
               <span className="cert-card__logo-fallback">{cert.issuer.charAt(0)}</span>
             )}

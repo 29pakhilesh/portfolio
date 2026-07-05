@@ -78,15 +78,29 @@ export default function ProjectDetailModal({ project, onClose }) {
           </ul>
         </div>
 
-        {project.github && (
-          <a
-            href={project.github}
-            className="btn btn--primary project-modal__github"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            View on GitHub <span aria-hidden="true">↗</span>
-          </a>
+        {(project.url || project.github) && (
+          <div className="project-modal__actions">
+            {project.url && (
+              <a
+                href={project.url}
+                className="btn btn--primary project-modal__action"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Live site <span aria-hidden="true">↗</span>
+              </a>
+            )}
+            {project.github && (
+              <a
+                href={project.github}
+                className={`btn ${project.url ? 'btn--ghost' : 'btn--primary'} project-modal__action`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub <span aria-hidden="true">↗</span>
+              </a>
+            )}
+          </div>
         )}
       </div>
     </div>,

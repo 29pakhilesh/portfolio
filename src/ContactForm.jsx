@@ -57,7 +57,7 @@ export default function ContactForm() {
         <SectionReveal>
         <div className="message-section__grid">
           <div className="message-section__intro">
-            <p className="section__number">04 — Contact</p>
+            <p className="section__number">05 — Contact</p>
             <h2 className="message-section__title">
               Let&apos;s get in <em>touch</em>
             </h2>
