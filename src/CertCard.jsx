@@ -7,6 +7,11 @@ export default function CertCard({ cert }) {
   const [logoFailed, setLogoFailed] = useState(false)
   const logoUrl = cert.logo ?? getCertLogoUrl(cert.name, cert.issuer)
   const tags = Array.isArray(cert.skills) ? cert.skills : cert.skills.split(', ')
+  const isExam = cert.kind === 'exam'
+  const isCourse = cert.kind === 'course'
+  const badgeLabel = cert.badge ?? (isExam ? 'Official' : isCourse ? 'Course' : 'Certified')
+  const actionLabel = isCourse ? 'View course certificate' : 'View certificate'
+  const useAwsLogoStyle = Boolean(cert.logo?.includes('aws') || cert.name.includes('AWS')) && !isCourse
 
   return (
     <>
@@ -14,9 +19,7 @@ export default function CertCard({ cert }) {
         <div className="cert-card__shine" aria-hidden="true" />
         <div className="cert-card__top">
           <div
-            className={`cert-card__logo-wrap${
-              cert.name.includes('AWS') ? ' cert-card__logo-wrap--aws' : ''
-            }`}
+            className={`cert-card__logo-wrap${useAwsLogoStyle ? ' cert-card__logo-wrap--aws' : ''}`}
           >
             {logoUrl && !logoFailed ? (
               <img
@@ -33,16 +36,28 @@ export default function CertCard({ cert }) {
             )}
           </div>
           <span className="cert-card__badge">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path
-                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-            Certified
+            {isExam ? (
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            ) : (
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M4 19.5A2.5 2.5 0 016.5 17H20M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            )}
+            {badgeLabel}
           </span>
         </div>
         <h4 className="cert-card__title">{cert.name}</h4>
@@ -74,7 +89,7 @@ export default function CertCard({ cert }) {
                 />
                 <circle cx="12" cy="12" r="2.5" stroke="currentColor" strokeWidth="2" />
               </svg>
-              View certificate
+              {actionLabel}
             </button>
           )}
         </div>

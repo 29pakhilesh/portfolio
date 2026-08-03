@@ -2,6 +2,7 @@ import { assetUrl } from './assetUrl'
 
 const LOCAL_ISSUER_LOGOS = {
   Udemy: 'icons/udemy.svg',
+  'Amazon Web Services': 'icons/aws.png',
   'Cisco Networking Academy': 'icons/cisco.svg',
   OnWingspan: 'icons/onwingspan.svg',
 }

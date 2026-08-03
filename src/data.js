@@ -2,9 +2,9 @@ import { assetUrl } from './assetUrl'
 
 export const profile = {
   name: 'Akhilesh Panigrahi',
-  title: 'B.Tech CSE Student · Summer Intern @ HSC',
+  title: 'B.Tech CSE Student · Ex-Intern @ HSC',
   tagline:
-    'Third-year Computer Science student at JUIT and Summer Intern at Hughes Systique Corporation — building web apps, browser-based systems, and scalable software.',
+    'Third-year Computer Science student at JUIT and former Summer Intern at Hughes Systique Corporation — building web apps, browser-based systems, and scalable software.',
   email: '29p.akhilesh@gmail.com',
   phone: '+91 9873081614',
   location: 'Ghaziabad, India',
@@ -22,17 +22,17 @@ export const profile = {
 }
 
 export const stats = [
-  { value: '14', label: 'Technologies', href: '#skills' },
-  { value: '5', label: 'Certifications', href: '#skills' },
+  { value: '15', label: 'Technologies', href: '#skills' },
+  { value: '6', label: 'Certifications', href: '#skills' },
   { value: '8', label: 'Projects built', href: '#work' },
   { value: '2028', label: 'Graduating', href: '#about' },
 ]
 
 export const about = [
   "I'm a B.Tech Computer Science student at Jaypee University of Information Technology, passionate about software development and problem solving.",
-  'Currently a Summer Intern at Hughes Systique Corporation (HSC), working in a hybrid role from Gurugram.',
+  'Completed a Summer Internship at Hughes Systique Corporation (HSC) from May 25 to July 24, 2026, in a hybrid role based in Gurugram.',
   'I build real-world systems — from a browser-based OS simulation to hostel complaint platforms with role-based dashboards and PostgreSQL backends.',
-  'Certified in AWS Cloud, Python, C, DSA, and Cybersecurity. Active on LeetCode and always learning new tools to ship better software.',
+  'AWS Certified Cloud Practitioner (CLF-C02). Also certified in Python, C, DSA, and Cybersecurity. Active on LeetCode and always learning new tools to ship better software.',
 ]
 
 export const experience = [
@@ -74,16 +74,16 @@ export const experience = [
     organization: 'Hughes Systique Corporation (HSC)',
     role: 'Summer Intern',
     location: 'Gurugram, Haryana, India',
-    period: 'May 2026 — Present',
+    period: 'May 25 — Jul 24, 2026',
     detail: 'Internship · Hybrid',
     kind: 'internship',
     logo: assetUrl('logos/hsc.png'),
     summary:
-      'Summer intern at Hughes Systique Corporation — a global software R&D and digital transformation company with development centers in Gurugram and Bengaluru.',
+      'Completed a summer internship at Hughes Systique Corporation — a global software R&D and digital transformation company with development centers in Gurugram and Bengaluru.',
     highlights: [
       'Hybrid internship based in Gurugram, Haryana',
       'Exposure to enterprise software development and engineering workflows',
-      'Working within a CMMI Level 5 certified global technology organization',
+      'Worked within a CMMI Level 5 certified global technology organization',
     ],
     website: 'https://www.hsc.com/',
   },
@@ -92,7 +92,7 @@ export const experience = [
 export const skills = [
   { category: 'Languages', items: ['C', 'C++', 'Python', 'JavaScript'] },
   { category: 'Web & Backend', items: ['React', 'Node.js', 'Express', 'Next.js', 'HTML', 'CSS'] },
-  { category: 'Databases & Tools', items: ['PostgreSQL', 'MySQL', 'Git', 'VS Code', 'Linux'] },
+  { category: 'Databases & Tools', items: ['PostgreSQL', 'MySQL', 'Git', 'VS Code', 'Linux', 'AWS'] },
 ]
 
 export const skillPills = [
@@ -313,6 +313,21 @@ export const techDetails = {
       },
     ],
   },
+  AWS: {
+    category: 'Databases & Tools',
+    summary:
+      'AWS Certified Cloud Practitioner (CLF-C02) — cloud fundamentals across compute, storage, networking, and identity.',
+    usages: [
+      {
+        project: 'AWS Certified Cloud Practitioner (CLF-C02)',
+        context: 'Passed the official Amazon Web Services exam covering EC2, S3, IAM, VPC, and cloud pricing models.',
+      },
+      {
+        project: 'AWS Cloud Practitioner Prep Course',
+        context: 'Completed Udemy exam-prep coursework before sitting the official CLF-C02 certification.',
+      },
+    ],
+  },
 }
 
 export function getTechDetail(techName) {
@@ -473,12 +488,25 @@ export const projects = [
 export const certifications = [
   {
     name: 'AWS Certified Cloud Practitioner (CLF-C02)',
-    issuer: 'Udemy',
+    issuer: 'Amazon Web Services',
     logo: assetUrl('icons/aws.png'),
-    period: 'Feb 2026',
+    period: 'Aug 2026',
     skills: ['Cloud fundamentals', 'EC2', 'S3', 'IAM'],
+    kind: 'exam',
+    badge: 'Official',
     certificateUrl: assetUrl('certificates/aws-cloud-practitioner.pdf'),
     downloadName: 'Akhilesh-Panigrahi-AWS-Cloud-Practitioner.pdf',
+  },
+  {
+    name: 'AWS Cloud Practitioner Prep Course',
+    issuer: 'Udemy',
+    logo: assetUrl('icons/udemy.svg'),
+    period: 'Feb 2026',
+    skills: ['Exam prep', 'Cloud concepts', 'Practice tests'],
+    kind: 'course',
+    badge: 'Course',
+    certificateUrl: assetUrl('certificates/aws-cloud-practitioner-udemy.pdf'),
+    downloadName: 'Akhilesh-Panigrahi-AWS-Cloud-Practitioner-Udemy.pdf',
   },
   {
     name: 'Python Bootcamp — Zero to Hero',
