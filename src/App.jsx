@@ -208,7 +208,9 @@ function About() {
                 </li>
                 <li>
                   <span>phone</span>
-                  <span>{profile.phone}</span>
+                  <a className="is-copyable" href={`tel:${profile.phone.replace(/\s/g, '')}`}>
+                    {profile.phone}
+                  </a>
                 </li>
                 <li>
                   <span>base</span>

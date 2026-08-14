@@ -15,7 +15,7 @@ export default function ContactForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    if (!form.name.trim() || !form.message.trim()) return
+    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) return
 
     if (!ACCESS_KEY) {
       setStatus('error')
@@ -31,7 +31,7 @@ export default function ContactForm() {
         body: JSON.stringify({
           access_key: ACCESS_KEY,
           name: form.name.trim(),
-          email: form.email.trim() || 'no-reply@portfolio.local',
+          email: form.email.trim(),
           message: form.message.trim(),
           subject: `Portfolio message from ${form.name.trim()}`,
           from_name: 'Portfolio — Akhilesh Panigrahi',
@@ -100,13 +100,14 @@ export default function ContactForm() {
               </label>
 
               <label className="contact-form__field">
-                <span className="contact-form__label">your email</span>
+                <span className="contact-form__label">your email *</span>
                 <input
                   type="email"
                   name="email"
                   value={form.email}
                   onChange={handleChange}
                   placeholder="so I can reply to you"
+                  required
                   autoComplete="email"
                 />
               </label>
