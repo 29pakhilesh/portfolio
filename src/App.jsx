@@ -4,7 +4,7 @@ import LiveBackground from './LiveBackground'
 import { SectionReveal, RevealGroup, RevealItem } from './useScrollReveal'
 import { useActiveSection } from './useActiveSection'
 import SkillIcon from './SkillIcon'
-import { preloadTechIcons } from './techIcons'
+import { preloadTechIcons, resolveTechIconName } from './techIcons'
 import CertCard from './CertCard'
 import ResumePreviewButton from './ResumePreviewButton'
 import AvailabilityStatus from './AvailabilityStatus'
@@ -12,7 +12,6 @@ import SkillDetailModal from './SkillDetailModal'
 import ExperienceDetailModal from './ExperienceDetailModal'
 import ProjectDetailModal from './ProjectDetailModal'
 import StrengthIcon from './StrengthIcon'
-import ThemeToggle from './ThemeToggle'
 import {
   profile,
   stats,
@@ -25,24 +24,13 @@ import {
   strengths,
   navLinks,
 } from './data'
+import CodeWindow from './CodeWindow'
+import SocialLinks from './SocialLinks'
+import GitHubStats from './GitHubStats'
+import { useUiMotion, ScrollProgress, StatCounter, TypeLine } from './UiMotion'
+import { useBodyScrollLock } from './useBodyScrollLock'
 import './App.css'
-
-function NavLogo({ onNavigate }) {
-  const [first, ...rest] = profile.name.split(' ')
-  const last = rest.join(' ')
-
-  return (
-    <a
-      href="#"
-      className="nav__logo"
-      aria-label={`${profile.name} — home`}
-      onClick={onNavigate}
-    >
-      <span className="nav__logo-name">{first}</span>
-      {last ? <span className="nav__logo-surname">{last}</span> : null}
-    </a>
-  )
-}
+import './Coder.css'
 
 function Nav() {
   const [scrolled, setScrolled] = useState(false)
@@ -51,21 +39,32 @@ function Nav() {
   const activeSection = useActiveSection(sectionIds)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40)
+    const onScroll = () => setScrolled(window.scrollY > 24)
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  useEffect(() => {
-    document.body.style.overflow = menuOpen ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
-  }, [menuOpen])
+  useBodyScrollLock(menuOpen)
+
+  const scrollHome = (e) => {
+    e.preventDefault()
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+    setMenuOpen(false)
+  }
 
   return (
     <>
       <header className={`nav ${scrolled ? 'nav--scrolled' : ''}`}>
         <div className="nav__inner">
-          <NavLogo onNavigate={() => setMenuOpen(false)} />
+          <a
+            href="#"
+            className="nav__logo"
+            aria-label={`${profile.name} — home`}
+            onClick={scrollHome}
+          >
+            <span className="nav__logo-prompt">~/</span>
+            akhilesh
+          </a>
           <ul className="nav__links">
             {navLinks.map((link) => {
               const id = link.href.replace('#', '')
@@ -75,7 +74,7 @@ function Nav() {
                   <a
                     href={link.href}
                     className={`nav__link${isActive ? ' nav__link--active' : ''}`}
-                    aria-current={isActive ? 'page' : undefined}
+                    aria-current={isActive ? 'location' : undefined}
                   >
                     {link.label}
                   </a>
@@ -84,7 +83,6 @@ function Nav() {
             })}
           </ul>
           <div className="nav__actions">
-            <ThemeToggle />
             <button
               type="button"
               className="nav__menu-btn"
@@ -100,10 +98,19 @@ function Nav() {
         </div>
       </header>
 
-      <nav className={`mobile-nav ${menuOpen ? 'mobile-nav--open' : ''}`} aria-hidden={!menuOpen}>
+      <nav
+        className={`mobile-nav ${menuOpen ? 'mobile-nav--open' : ''}`}
+        aria-hidden={!menuOpen}
+        inert={menuOpen ? undefined : ''}
+      >
         <div className="mobile-nav__top">
-          <ThemeToggle />
-          <button type="button" className="mobile-nav__close" aria-label="Close" onClick={() => setMenuOpen(false)}>✕</button>
+          <span className="nav__logo">
+            <span className="nav__logo-prompt">~/</span>
+            akhilesh
+          </span>
+          <button type="button" className="mobile-nav__close" aria-label="Close" onClick={() => setMenuOpen(false)}>
+            ✕
+          </button>
         </div>
         {navLinks.map((link) => {
           const id = link.href.replace('#', '')
@@ -113,7 +120,7 @@ function Nav() {
               key={link.href}
               href={link.href}
               className={`mobile-nav__link${isActive ? ' mobile-nav__link--active' : ''}`}
-              aria-current={isActive ? 'page' : undefined}
+              aria-current={isActive ? 'location' : undefined}
               onClick={() => setMenuOpen(false)}
             >
               {link.label}
@@ -126,42 +133,45 @@ function Nav() {
 }
 
 function Hero() {
-  const [first, ...rest] = profile.name.split(' ')
-  const last = rest.join(' ')
-
   return (
     <section className="hero">
-      <div className="hero__orb hero__orb--1" aria-hidden="true" />
-      <div className="hero__orb hero__orb--2" aria-hidden="true" />
-      <div className="hero__grid-lines" aria-hidden="true" />
       <div className="container hero__content">
         <div className="hero__main">
-          <h1 className="hero__title">
-            Hi, I&apos;m <span className="gradient-text">{first}</span>
-            <br />
-            <em>{last}</em>
-          </h1>
+          <p className="hero__boot">
+            <span className="hero__boot-ok">ok</span> portfolio.boot — modules loaded
+          </p>
+          <p className="hero__kicker">
+            <span className="hero__status" />
+            {profile.availabilityLabel} · {profile.location}
+          </p>
+          <TypeLine text={profile.name} as="h1" className="hero__title" delay={200} />
           <p className="hero__role">{profile.title}</p>
           <p className="hero__tagline">{profile.tagline}</p>
           <div className="hero__actions">
             <a href="#work" className="btn btn--primary">
-              See my projects <span aria-hidden="true">→</span>
+              View projects
             </a>
             <ResumePreviewButton className="btn btn--ghost">
-              <span className="btn__label">View resume</span>
+              <span className="btn__label">Resume.pdf</span>
             </ResumePreviewButton>
             <a href="#contact" className="btn btn--ghost">
-              <span className="btn__label">Contact me</span>
+              <span className="btn__label">Contact</span>
             </a>
           </div>
         </div>
-        <div className="hero__stats">
-          {stats.map((s) => (
-            <a key={s.label} href={s.href} className="stat">
-              <span className="stat__value">{s.value}</span>
-              <span className="stat__label">{s.label}</span>
-            </a>
-          ))}
+        <div className="hero__side">
+          <CodeWindow />
+          <div className="hero__side-bottom">
+            <GitHubStats variant="compact" />
+            <div className="hero__stats">
+              {stats.map((s) => (
+                <a key={s.label} href={s.href} className="stat">
+                  <StatCounter value={s.value} />
+                  <span className="stat__label">{s.label}</span>
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -174,39 +184,42 @@ function About() {
       <div className="container">
         <SectionReveal>
           <div className="section__header">
-            <p className="section__number">01 — About</p>
+            <p className="section__number">01 / about</p>
             <h2 className="section__title">Who I am</h2>
           </div>
           <div className="about__grid">
             <div className="about__card">
-              <div className="about__photo-frame">
-                <img
-                  src={profile.photoAbout}
-                  alt={profile.name}
-                  className="about__photo"
-                  width={940}
-                  height={629}
-                />
+              <div className="about__identity">
+                <div className="about__photo-wrap">
+                  <img
+                    src={profile.photoAbout}
+                    alt={profile.name}
+                    className="about__photo"
+                    width={1024}
+                    height={768}
+                  />
+                </div>
+                <div className="about__identity-meta">
+                  <h3>{profile.name}</h3>
+                  <p className="about__card-role">{profile.title}</p>
+                </div>
               </div>
-              <h3>{profile.name}</h3>
-              <p className="about__card-role">{profile.title}</p>
               <ul className="about__contact-list">
-                <li>✉ <a href={`mailto:${profile.email}`}>{profile.email}</a></li>
-                <li>📱 <span>{profile.phone}</span></li>
-                <li>📍 <span>{profile.location}</span></li>
                 <li>
-                  🔗{' '}
-                  <a href={profile.social.github} target="_blank" rel="noopener noreferrer">
-                    GitHub
-                  </a>
-                  {' · '}
-                  <a href={profile.social.linkedin} target="_blank" rel="noopener noreferrer">
-                    LinkedIn
-                  </a>
-                  {' · '}
-                  <a href={profile.social.leetcode} target="_blank" rel="noopener noreferrer">
-                    LeetCode
-                  </a>
+                  <span>email</span>
+                  <a href={`mailto:${profile.email}`}>{profile.email}</a>
+                </li>
+                <li>
+                  <span>phone</span>
+                  <span>{profile.phone}</span>
+                </li>
+                <li>
+                  <span>base</span>
+                  <span>{profile.location}</span>
+                </li>
+                <li>
+                  <span>links</span>
+                  <SocialLinks />
                 </li>
               </ul>
               <ResumePreviewButton className="about__resume-btn">
@@ -214,9 +227,10 @@ function About() {
               </ResumePreviewButton>
             </div>
             <div className="about__text">
-              {about.map((p, i) => (
-                <p key={i}>{p}</p>
+              {about.map((p) => (
+                <p key={p}>{p}</p>
               ))}
+              <GitHubStats />
               <AvailabilityStatus />
             </div>
           </div>
@@ -271,13 +285,14 @@ function ExperienceCard({ item, onSelect }) {
               <span className={`experience-card__type experience-card__type--${item.kind}`}>
                 {typeLabel}
               </span>
-              {item.period ? (
-                <span className="experience-card__period">{item.period}</span>
-              ) : null}
+              {item.period ? <span className="experience-card__period">{item.period}</span> : null}
             </div>
             <h3 className="experience-card__org">
               {item.organization}
-              <span className="experience-card__arrow" aria-hidden="true"> +</span>
+              <span className="experience-card__arrow" aria-hidden="true">
+                {' '}
+                +
+              </span>
             </h3>
             <p className="experience-card__role">{item.role}</p>
             <p className="experience-card__location">{item.location}</p>
@@ -296,8 +311,8 @@ function Experience() {
       <div className="container">
         <SectionReveal>
           <div className="section__header">
-            <p className="section__number">02 — Experience</p>
-            <h2 className="section__title">Where I&apos;ve studied & worked</h2>
+            <p className="section__number">02 / experience</p>
+            <h2 className="section__title">Where I&apos;ve studied &amp; worked</h2>
           </div>
           <div className="experience-groups">
             {experienceGroups.map((group) =>
@@ -332,13 +347,6 @@ function Experience() {
 function ProjectCard({ project, onSelect }) {
   const openDetails = () => onSelect(project)
 
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault()
-      openDetails()
-    }
-  }
-
   const stopNav = (e) => {
     e.stopPropagation()
   }
@@ -348,71 +356,168 @@ function ProjectCard({ project, onSelect }) {
       className={`project-card ${project.featured ? 'project-card--featured' : ''}`}
       style={{ '--project-accent': project.accent }}
     >
-      <div
+      <span className="project-card__period">{project.period}</span>
+
+      <div className="project-card__head">
+        <button
+          type="button"
+          className="project-card__title-btn"
+          onClick={openDetails}
+          aria-label={`View details for ${project.title}`}
+        >
+          <span className="project-card__title">{project.title}</span>
+          <span className="project-card__arrow" aria-hidden="true">
+            +
+          </span>
+        </button>
+
+        {(project.url || project.github) && (
+          <div className="project-card__links">
+            {project.url && (
+              <a
+                href={project.url}
+                className="project-card__link"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={stopNav}
+              >
+                Live ↗
+              </a>
+            )}
+            {project.github && (
+              <a
+                href={project.github}
+                className="project-card__link"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={stopNav}
+              >
+                GitHub ↗
+              </a>
+            )}
+          </div>
+        )}
+      </div>
+
+      <button
+        type="button"
         className="project-card__main"
-        role="button"
-        tabIndex={0}
         onClick={openDetails}
-        onKeyDown={handleKeyDown}
         aria-label={`View details for ${project.title}`}
       >
-        <div className="project-card__accent-bar" />
-        <span className="project-card__period">{project.period}</span>
-        <h3>
-          {project.title}
-          <span className="project-card__arrow" aria-hidden="true"> +</span>
-        </h3>
         <p>{project.description}</p>
         <div className="project-card__tags">
           {project.tags.map((tag) => (
-            <span key={tag} className="project-card__tag">{tag}</span>
+            <span key={tag} className="project-card__tag">
+              {tag}
+            </span>
           ))}
         </div>
-      </div>
-
-      {(project.url || project.github) && (
-        <div className="project-card__links">
-          {project.url && (
-            <a
-              href={project.url}
-              className="project-card__link"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={stopNav}
-            >
-              Live site <span aria-hidden="true">↗</span>
-            </a>
-          )}
-          {project.github && (
-            <a
-              href={project.github}
-              className="project-card__link"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={stopNav}
-            >
-              GitHub <span aria-hidden="true">↗</span>
-            </a>
-          )}
-        </div>
-      )}
+      </button>
     </article>
+  )
+}
+
+function DeployedProjects() {
+  const deployed = projects.filter((p) => p.url && p.image)
+  if (deployed.length === 0) return null
+
+  return (
+    <div className="deployed">
+      <div className="deployed__header">
+        <h3 className="deployed__title">Deployed projects</h3>
+        <p className="deployed__subtitle">Live builds you can open and use right now</p>
+      </div>
+      <div className="deployed__list">
+        {deployed.map((project) => {
+          const highlights = project.highlights ?? []
+          return (
+            <article key={project.title} className="deployed__item">
+              <div className="deployed__media">
+                <img
+                  src={project.image}
+                  alt={`Screenshot of ${project.title}`}
+                  className="deployed__img"
+                  loading="lazy"
+                  width={1024}
+                  height={640}
+                />
+                <div className="deployed__slide">
+                  <p className="deployed__period">
+                    {project.period}
+                    {project.featured ? ' · featured' : ''}
+                  </p>
+                  <p className="deployed__desc">{project.description}</p>
+                  {highlights.length > 0 && (
+                    <div className="deployed__built">
+                      <p className="deployed__label">what i built</p>
+                      <ul className="deployed__highlights">
+                        {highlights.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  <div className="deployed__stack">
+                    <p className="deployed__label">tech stack</p>
+                    <ul className="deployed__icons">
+                      {project.tags.map((tag) => (
+                        <li key={tag}>
+                          <SkillIcon name={resolveTechIconName(tag)} label={tag} size="sm" />
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div className="deployed__body">
+                <h4 className="deployed__name">{project.title}</h4>
+                <div className="deployed__links">
+                  <a
+                    href={project.url}
+                    className="deployed__link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Live ↗
+                  </a>
+                  {project.github && (
+                    <a
+                      href={project.github}
+                      className="deployed__link"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      GitHub ↗
+                    </a>
+                  )}
+                </div>
+              </div>
+            </article>
+          )
+        })}
+      </div>
+    </div>
   )
 }
 
 function Work() {
   const [selectedProject, setSelectedProject] = useState(null)
+  const listedProjects = projects.filter((p) => !(p.url && p.image))
 
   return (
     <section id="work" className="section">
       <div className="container">
         <RevealGroup className="work-reveal">
           <RevealItem className="section__header">
-            <p className="section__number">03 — Projects</p>
+            <p className="section__number">03 / projects</p>
             <h2 className="section__title">Things I&apos;ve built</h2>
           </RevealItem>
+          <RevealItem>
+            <DeployedProjects />
+          </RevealItem>
           <div className="projects-bento">
-            {projects.map((project) => (
+            {listedProjects.map((project) => (
               <RevealItem key={project.title}>
                 <ProjectCard project={project} onSelect={setSelectedProject} />
               </RevealItem>
@@ -428,14 +533,10 @@ function Work() {
 }
 
 function Skills() {
-  const doubledPills = [...skillPills, ...skillPills]
   const [selectedTech, setSelectedTech] = useState(null)
 
   useEffect(() => {
-    const allTech = [
-      ...skillPills,
-      ...skills.flatMap((g) => g.items),
-    ]
+    const allTech = [...skillPills, ...skills.flatMap((g) => g.items)]
     preloadTechIcons(allTech)
   }, [])
 
@@ -444,19 +545,8 @@ function Skills() {
       <div className="container">
         <SectionReveal>
           <div className="section__header">
-            <p className="section__number">04 — Skills</p>
-            <h2 className="section__title">Tech stack & certs</h2>
-          </div>
-
-          <div className="skills-marquee" aria-hidden="true">
-            <div className="skills-marquee__track">
-              {doubledPills.map((pill, i) => (
-                <span key={`${pill}-${i}`} className="skill-pill">
-                  <SkillIcon name={pill} size="sm" showLabel={false} eager />
-                  <span>{pill}</span>
-                </span>
-              ))}
-            </div>
+            <p className="section__number">04 / skills</p>
+            <h2 className="section__title">Tech stack &amp; certs</h2>
           </div>
 
           <div className="skills__grid">
@@ -488,7 +578,7 @@ function Skills() {
           <div className="certs-block">
             <div className="certs-block__header">
               <h3 className="certs-block__title">Certifications</h3>
-              <p className="certs-block__subtitle">Verified credentials & professional coursework</p>
+              <p className="certs-block__subtitle">Verified credentials &amp; professional coursework</p>
             </div>
             <div className="certs">
               {certifications.map((cert) => (
@@ -517,14 +607,17 @@ function Footer() {
   return (
     <footer className="footer container">
       <span>© {new Date().getFullYear()} {profile.name}</span>
-      <span>B.Tech CSE · JUIT · Built with React</span>
+      <span>B.Tech CSE · JUIT · React + Vite</span>
     </footer>
   )
 }
 
 export default function App() {
+  useUiMotion()
+
   return (
     <div className="app">
+      <ScrollProgress />
       <LiveBackground />
       <Nav />
       <main>
