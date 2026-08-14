@@ -68,6 +68,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html {
@@ -76,6 +77,9 @@ html {
   scroll-padding-top: var(--nav-height);
   scrollbar-width: thin;
   scrollbar-color: #2a2a2a transparent;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 body {
@@ -86,6 +90,85 @@ body {
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Only values people actually need to copy. Everything else stays locked. */
+input,
+textarea,
+[contenteditable='true'],
+a[href^='mailto:'],
+a[href^='tel:'],
+.is-copyable {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/* Interactive chrome and the animated code panel never take a selection. */
+button,
+button *,
+a.btn,
+a.btn *,
+.nav,
+.nav *,
+.mobile-nav,
+.mobile-nav *,
+.stat,
+.stat *,
+.github-stats,
+.github-stats *,
+.code-window,
+.code-window *,
+.type-line,
+.type-line *,
+.hero__boot,
+.hero__tagline,
+.hero__role,
+.section__title,
+.section__number,
+.skill-icon,
+.skill-icon *,
+.footer,
+.footer *,
+.message-section__desc,
+.message-section__meta,
+.availability-note,
+.certs-block__subtitle,
+.deployed__subtitle,
+.deployed__desc-inline {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+a,
+button,
+input,
+textarea,
+select,
+label,
+summary,
+[role='button'] {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a:focus,
+button:focus,
+input:focus,
+textarea:focus,
+select:focus,
+summary:focus,
+[role='button']:focus {
+  outline: none;
+}
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+[role='button']:focus-visible {
+  outline: 2px solid #555;
+  outline-offset: 2px;
 }
 
 body::after {
@@ -108,9 +191,25 @@ a {
   text-decoration: none;
 }
 
-::selection {
-  background: rgba(242, 239, 232, 0.22);
-  color: #f2efe8;
+/* Terminal-style inverted selection on copyable values only. */
+a[href^='mailto:']::selection,
+a[href^='tel:']::selection,
+.is-copyable::selection,
+input::selection,
+textarea::selection {
+  background: #f2efe8;
+  color: #050505;
+  text-shadow: none;
+}
+
+a[href^='mailto:']::-moz-selection,
+a[href^='tel:']::-moz-selection,
+.is-copyable::-moz-selection,
+input::-moz-selection,
+textarea::-moz-selection {
+  background: #f2efe8;
+  color: #050505;
+  text-shadow: none;
 }
 
 .sr-only {
