@@ -4,3 +4,6 @@ dist
 
 *.local
 .env
+
+# Local lab work — not part of the portfolio site
+SimpleStorage-Remix/
