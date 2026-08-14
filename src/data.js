@@ -33,7 +33,7 @@ export const githubStatsFallback = {
 export const stats = [
   { value: '15', label: 'Technologies', href: '#skills' },
   { value: '6', label: 'Certifications', href: '#skills' },
-  { value: '8', label: 'Projects built', href: '#work' },
+  { value: '9', label: 'Projects built', href: '#work' },
   { value: '2028', label: 'Graduating', href: '#about' },
 ]
 
@@ -97,6 +97,23 @@ export const experience = [
       'OpenStack Swift — object storage concepts: containers, objects, and cloud storage workflows',
     ],
     website: 'https://www.hsc.com/',
+  },
+  {
+    organization: 'DLR Info',
+    role: 'Freelance Full-Stack Developer',
+    location: 'Remote',
+    period: 'Jul 2026 — Present',
+    detail: 'Paid Freelance · Remote',
+    kind: 'freelance',
+    logo: assetUrl('logos/dlr-info.svg'),
+    summary:
+      'Paid freelance engagement to design and ship a production live draw-results platform — public results board, history archive, and admin publishing tools — delivered end-to-end for a client.',
+    highlights: [
+      'Delivered a paid client product from requirements through deployment',
+      'Built live results dashboard and historical draw archive for end users',
+      'Implemented secure admin workflows to publish and manage draw results',
+      'Full-stack delivery with Next.js frontend, Express API, and PostgreSQL',
+    ],
   },
 ]
 
@@ -367,6 +384,56 @@ export function getTechDetail(techName) {
 
 export const projects = [
   {
+    title: 'DLR Info — Live Draw Results',
+    description:
+      'Paid freelance project: production live draw-results platform with a public results board, history archive, and admin tools for publishing and managing draws.',
+    highlights: [
+      'Client-paid freelance delivery from build through production use',
+      'Live results dashboard with clear per-place draw cards',
+      'History archive for browsing past draw numbers',
+      'Admin workflow to publish, edit, and manage results securely',
+      'Separate Next.js frontend and Express API with Postgres persistence',
+    ],
+    tags: ['Next.js', 'React', 'Express', 'PostgreSQL'],
+    period: 'Jul 2026 — Present',
+    accent: '#c8c8c8',
+    featured: true,
+    url: '',
+    github: '',
+  },
+  {
+    title: 'Traffic Sign Recognition',
+    description:
+      'Deep learning app with ResNet18 to classify traffic signs from images and live webcam feed.',
+    highlights: [
+      'ResNet18 model trained for traffic sign classes',
+      'Image upload and live webcam inference',
+      'FastAPI backend serving predictions to the UI',
+    ],
+    tags: ['Python', 'PyTorch', 'FastAPI', 'Deep Learning'],
+    period: 'May 2026',
+    accent: '#c8c8c8',
+    featured: false,
+    url: '',
+    github: 'https://github.com/29pakhilesh/Traffic-Sign-Recognition',
+  },
+  {
+    title: 'Automated Resume Scoring System',
+    description:
+      'Full-stack app that scores resumes against a job description with semantic similarity and feedback.',
+    highlights: [
+      'Resume–JD semantic similarity scoring',
+      'Keyword coverage and gap analysis',
+      'Actionable feedback for improving match strength',
+    ],
+    tags: ['React', 'TypeScript', 'FastAPI', 'SQLite'],
+    period: 'Apr — May 2026',
+    accent: '#c8c8c8',
+    featured: false,
+    url: '',
+    github: 'https://github.com/29pakhilesh/Automated-Resume-Scoring-System',
+  },
+  {
     title: 'Hostel Complaint Management System',
     description:
       'Web platform for students to submit and track hostel complaints with role-based dashboards and real-time updates.',
@@ -382,23 +449,6 @@ export const projects = [
     url: 'https://hostel-complaint-system-opal.vercel.app',
     github: 'https://github.com/29pakhilesh/Hostel-Complaint-System',
     image: assetUrl('projects/hostel-complaint.png'),
-  },
-  {
-    title: 'WebUnix — Browser-Based OS',
-    description:
-      'Browser-based OS with multi-app desktop, LocalStorage file system, auth, and persistent sessions.',
-    highlights: [
-      'Desktop-style UI with draggable windows and app launcher',
-      'LocalStorage-backed virtual file system',
-      'Login flow with session persistence in the browser',
-    ],
-    tags: ['HTML', 'CSS', 'JavaScript', 'LocalStorage'],
-    period: 'Dec 2025',
-    accent: '#c8c8c8',
-    featured: true,
-    url: 'https://webunix.vercel.app',
-    github: 'https://github.com/29pakhilesh/Webunix',
-    image: assetUrl('projects/webunix.png'),
   },
   {
     title: 'Online Quiz System',
@@ -435,6 +485,23 @@ export const projects = [
     image: assetUrl('projects/green-computing.png'),
   },
   {
+    title: 'WebUnix — Browser-Based OS',
+    description:
+      'Browser-based OS with multi-app desktop, LocalStorage file system, auth, and persistent sessions.',
+    highlights: [
+      'Desktop-style UI with draggable windows and app launcher',
+      'LocalStorage-backed virtual file system',
+      'Login flow with session persistence in the browser',
+    ],
+    tags: ['HTML', 'CSS', 'JavaScript', 'LocalStorage'],
+    period: 'Dec 2025',
+    accent: '#c8c8c8',
+    featured: true,
+    url: 'https://webunix.vercel.app',
+    github: 'https://github.com/29pakhilesh/Webunix',
+    image: assetUrl('projects/webunix.png'),
+  },
+  {
     title: 'Parking Management System',
     description:
       'C++ system for vehicle entry/exit, GST-based billing, file handling, and automated records.',
@@ -465,38 +532,6 @@ export const projects = [
     featured: false,
     url: '',
     github: 'https://github.com/29pakhilesh/splitter-merger-tool-for-pdfs',
-  },
-  {
-    title: 'Traffic Sign Recognition',
-    description:
-      'Deep learning app with ResNet18 to classify traffic signs from images and live webcam feed.',
-    highlights: [
-      'ResNet18 model trained for traffic sign classes',
-      'Image upload and live webcam inference',
-      'FastAPI backend serving predictions to the UI',
-    ],
-    tags: ['Python', 'PyTorch', 'FastAPI', 'Deep Learning'],
-    period: 'May 2026',
-    accent: '#c8c8c8',
-    featured: false,
-    url: '',
-    github: 'https://github.com/29pakhilesh/Traffic-Sign-Recognition',
-  },
-  {
-    title: 'Automated Resume Scoring System',
-    description:
-      'Full-stack app that scores resumes against a job description with semantic similarity and feedback.',
-    highlights: [
-      'Resume–JD semantic similarity scoring',
-      'Keyword coverage and gap analysis',
-      'Actionable feedback for improving match strength',
-    ],
-    tags: ['React', 'TypeScript', 'FastAPI', 'SQLite'],
-    period: 'Apr — May 2026',
-    accent: '#c8c8c8',
-    featured: false,
-    url: '',
-    github: 'https://github.com/29pakhilesh/Automated-Resume-Scoring-System',
   },
 ]
 

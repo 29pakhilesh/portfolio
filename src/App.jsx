@@ -140,10 +140,6 @@ function Hero() {
           <p className="hero__boot">
             <span className="hero__boot-ok">ok</span> portfolio.boot — modules loaded
           </p>
-          <p className="hero__kicker">
-            <span className="hero__status" />
-            {profile.availabilityLabel} · {profile.location}
-          </p>
           <TypeLine text={profile.name} as="h1" className="hero__title" delay={200} />
           <p className="hero__role">{profile.title}</p>
           <p className="hero__tagline">{profile.tagline}</p>
@@ -257,6 +253,7 @@ const experienceTypeLabels = {
   education: 'Education',
   internship: 'Internship',
   job: 'Job',
+  freelance: 'Freelance',
 }
 
 function ExperienceCard({ item, onSelect }) {
