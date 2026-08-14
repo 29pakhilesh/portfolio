@@ -1,101 +1,83 @@
-import { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react'
-import { createPortal } from 'react-dom'
+import { useEffect, useRef, useState } from 'react'
 
-const CopyToastContext = createContext(null)
-
-export function CopyToastProvider({ children }) {
-  const [toast, setToast] = useState({ visible: false, label: 'Copied' })
-  const hideTimer = useRef(null)
-
-  const showCopied = useCallback((label = 'Copied') => {
-    if (hideTimer.current) clearTimeout(hideTimer.current)
-    setToast({ visible: true, label })
-    hideTimer.current = setTimeout(() => {
-      setToast((prev) => ({ ...prev, visible: false }))
-    }, 1700)
-  }, [])
-
-  useEffect(() => () => clearTimeout(hideTimer.current), [])
-
-  return (
-    <CopyToastContext.Provider value={showCopied}>
-      {children}
-      {createPortal(
-        <div
-          className={`copy-toast${toast.visible ? ' is-visible' : ''}`}
-          role="status"
-          aria-live="polite"
-          aria-hidden={!toast.visible}
-        >
-          <span className="copy-toast__icon" aria-hidden="true">
-            <svg viewBox="0 0 16 16" fill="none">
-              <path
-                d="M3.5 8.5 6.5 11.5 12.5 4.5"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="square"
-                strokeLinejoin="miter"
-              />
-            </svg>
-          </span>
-          <span className="copy-toast__text">{toast.label}</span>
-        </div>,
-        document.body,
-      )}
-    </CopyToastContext.Provider>
-  )
-}
-
-export function useCopyToast() {
-  return useContext(CopyToastContext)
-}
-
-async function writeClipboard(text) {
-  if (navigator.clipboard?.writeText) {
-    await navigator.clipboard.writeText(text)
-    return
-  }
-
+function legacyCopy(text) {
   const ta = document.createElement('textarea')
   ta.value = text
   ta.setAttribute('readonly', '')
   ta.style.position = 'fixed'
+  ta.style.top = '0'
   ta.style.opacity = '0'
   document.body.appendChild(ta)
   ta.select()
+  ta.setSelectionRange(0, ta.value.length)
   document.execCommand('copy')
   document.body.removeChild(ta)
 }
 
-export function Copyable({
-  value,
-  href,
-  className = '',
-  children,
-  label = 'Copied',
-  ...rest
-}) {
-  const showCopied = useCopyToast()
-
-  const handleClick = async (e) => {
-    e.preventDefault()
-    try {
-      await writeClipboard(value)
-      showCopied?.(label)
-    } catch {
-      showCopied?.('Copy failed')
+async function writeClipboard(text) {
+  try {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(text)
+      return
     }
+  } catch {
+    /* fall through */
+  }
+
+  legacyCopy(text)
+}
+
+export function Copyable({ value, href, className = '', children, ...rest }) {
+  const [copied, setCopied] = useState(false)
+  const hideTimer = useRef(null)
+
+  useEffect(() => () => clearTimeout(hideTimer.current), [])
+
+  const handleClick = (e) => {
+    e.preventDefault()
+    writeClipboard(value)
+
+    clearTimeout(hideTimer.current)
+    setCopied(true)
+
+    // Hold, then remove class so CSS reverses the same slide.
+    hideTimer.current = setTimeout(() => {
+      setCopied(false)
+    }, 1600)
   }
 
   return (
     <a
       href={href}
-      className={`is-copyable ${className}`.trim()}
+      className={`copyable is-copyable${copied ? ' is-copied' : ''} ${className}`.trim()}
       onClick={handleClick}
       title="Click to copy"
       {...rest}
     >
-      {children}
+      <span className="copyable__value">{children}</span>
+      <span className="copyable__aside" aria-live="polite" aria-hidden={!copied}>
+        <span className="copyable__comment">
+          <span className="copyable__slashes" aria-hidden="true">
+            //
+          </span>
+          <span className="copyable__reveal">
+            <span className="copyable__word">copied</span>
+            <span className="copyable__tick" aria-hidden="true">
+              <svg viewBox="0 0 16 16" fill="none">
+                <circle cx="8" cy="8" r="6.25" stroke="currentColor" strokeWidth="1.4" />
+                <path
+                  d="M4.6 8.2 7 10.5 11.5 5.4"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </span>
+          </span>
+        </span>
+      </span>
+      <span className="sr-only">{copied ? 'Copied to clipboard' : ''}</span>
     </a>
   )
 }

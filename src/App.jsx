@@ -30,7 +30,7 @@ import SocialLinks from './SocialLinks'
 import GitHubStats from './GitHubStats'
 import { useUiMotion, ScrollProgress, StatCounter, TypeLine } from './UiMotion'
 import { useBodyScrollLock } from './useBodyScrollLock'
-import { CopyToastProvider, Copyable } from './CopyToast'
+import { Copyable } from './CopyToast'
 import './App.css'
 import './Coder.css'
 
@@ -208,7 +208,6 @@ function About() {
                   <Copyable
                     value={profile.email}
                     href={`mailto:${profile.email}`}
-                    label="Copied email"
                   >
                     {profile.email}
                   </Copyable>
@@ -218,7 +217,6 @@ function About() {
                   <Copyable
                     value={profile.phone}
                     href={`tel:${profile.phone.replace(/\s/g, '')}`}
-                    label="Copied phone"
                   >
                     {profile.phone}
                   </Copyable>
@@ -655,21 +653,19 @@ export default function App() {
   useUiMotion()
 
   return (
-    <CopyToastProvider>
-      <div className="app">
-        <ScrollProgress />
-        <LiveBackground />
-        <Nav />
-        <main>
-          <Hero />
-          <About />
-          <Experience />
-          <Work />
-          <Skills />
-          <ContactForm />
-        </main>
-        <Footer />
-      </div>
-    </CopyToastProvider>
+    <div className="app">
+      <ScrollProgress />
+      <LiveBackground />
+      <Nav />
+      <main>
+        <Hero />
+        <About />
+        <Experience />
+        <Work />
+        <Skills />
+        <ContactForm />
+      </main>
+      <Footer />
+    </div>
   )
 }

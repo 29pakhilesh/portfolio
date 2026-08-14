@@ -658,8 +658,8 @@
   min-height: 2.5rem;
 }
 
-.about__contact-list li span:last-child,
-.about__contact-list li a {
+.about__contact-list li > span:last-child,
+.about__contact-list li > a {
   word-break: break-word;
   font-size: 1.05rem;
   line-height: 1.3;
@@ -679,12 +679,21 @@
 .about__contact-list a {
   color: var(--text);
   text-decoration: none;
-  border-bottom: 1px solid #444;
-  padding-bottom: 0.05rem;
+  border-bottom: none;
+  padding-bottom: 0;
   width: fit-content;
 }
 
-.about__contact-list a:hover {
+.about__contact-list .copyable__value {
+  border-bottom: 1px solid #444;
+  padding-bottom: 0.05rem;
+}
+
+.about__contact-list .copyable:hover {
+  color: #f2efe8;
+}
+
+.about__contact-list .copyable:hover .copyable__value {
   border-color: #f2efe8;
   color: #f2efe8;
 }
@@ -1811,11 +1820,15 @@
   color: var(--text);
   font-family: var(--mono);
   font-size: 0.9em;
-  border-bottom: 1px solid #444;
+  border-bottom: none;
   text-decoration: none;
 }
 
-.message-section__desc a:hover {
+.message-section__desc .copyable__value {
+  border-bottom: 1px solid #444;
+}
+
+.message-section__desc a:hover .copyable__value {
   border-color: #f2efe8;
 }
 
@@ -1981,7 +1994,8 @@
 }
 
 .contact-reach__email {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   margin: 0;
   font-family: var(--mono);
   font-size: clamp(0.92rem, 1.8vw, 1.05rem);
@@ -1989,11 +2003,20 @@
   font-weight: 500;
   color: var(--text);
   text-decoration: none;
-  border-bottom: 1px solid #444;
+  border-bottom: none;
   width: fit-content;
 }
 
+.contact-reach__email .copyable__value {
+  border-bottom: 1px solid #444;
+  padding-bottom: 0.05rem;
+}
+
 .contact-reach__email:hover {
+  color: #f2efe8;
+}
+
+.contact-reach__email:hover .copyable__value {
   border-color: #f2efe8;
   color: #f2efe8;
 }

@@ -228,65 +228,136 @@ textarea::-moz-selection {
   border: 0;
 }
 
-/* Copy feedback toast — slides up from bottom */
-.copy-toast {
-  position: fixed;
-  left: 50%;
-  bottom: max(1.25rem, env(safe-area-inset-bottom, 0px));
-  z-index: 10000;
+/* Inline copy feedback: //copied ○✓ (code comment style) */
+.copyable {
   display: inline-flex;
   align-items: center;
-  gap: 0.65rem;
-  padding: 0.72rem 1.15rem;
-  border: 1px solid #3a3a3a;
-  background: #0c0c0c;
-  color: var(--text);
-  font-family: var(--mono);
-  font-size: 0.78rem;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: lowercase;
-  transform: translate(-50%, calc(100% + 1.5rem));
+  max-width: 100%;
+  vertical-align: baseline;
+}
+
+.copyable__value {
+  min-width: 0;
+}
+
+.copyable__aside {
+  display: inline-flex;
+  align-items: center;
+  overflow: hidden;
+  max-width: 0;
   opacity: 0;
   pointer-events: none;
+  margin-left: 0;
+  /* Exit: fade after the slide collapses so reverse is visible */
   transition:
-    transform 0.5s var(--ease-out),
-    opacity 0.35s ease;
-  will-change: transform, opacity;
+    max-width 0.45s var(--ease-out),
+    margin-left 0.45s var(--ease-out),
+    opacity 0.22s ease 0.22s;
 }
 
-.copy-toast.is-visible {
-  transform: translate(-50%, 0);
+.copyable.is-copied .copyable__aside {
+  max-width: 8.25rem;
   opacity: 1;
+  margin-left: 0.55rem;
+  /* Enter: fade with the open */
+  transition:
+    max-width 0.45s var(--ease-out),
+    margin-left 0.45s var(--ease-out),
+    opacity 0.22s ease;
 }
 
-.copy-toast__icon {
-  display: grid;
-  place-items: center;
-  width: 1.15rem;
-  height: 1.15rem;
-  border: 1px solid #3a3a3a;
-  background: #141414;
-  color: #f2efe8;
+a.copyable.contact-reach__link {
+  gap: 0;
+}
+
+.copyable__comment {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 0.92em;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1;
+  color: #8a8a8a;
+  white-space: nowrap;
+}
+
+.copyable__slashes {
   flex-shrink: 0;
 }
 
-.copy-toast__icon svg {
-  width: 0.7rem;
-  height: 0.7rem;
+.copyable__reveal {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  overflow: hidden;
+  max-width: 0;
+  /* Exit: collapse immediately (reverse of enter) */
+  transition: max-width 0.4s var(--ease-out);
 }
 
-.copy-toast__text {
-  line-height: 1;
+.copyable.is-copied .copyable__reveal {
+  max-width: 5.75rem;
+  /* Enter: open slightly after // */
+  transition: max-width 0.45s var(--ease-out) 0.05s;
+}
+
+.copyable__word {
+  display: inline-block;
+  transform: translateX(-110%);
+  /* Exit: slide back left */
+  transition: transform 0.4s var(--ease-out);
+}
+
+.copyable.is-copied .copyable__word {
+  transform: translateX(0);
+  /* Enter: slide in from left */
+  transition: transform 0.45s var(--ease-out) 0.05s;
+}
+
+.copyable__tick {
+  display: inline-grid;
+  place-items: center;
+  width: 0.95rem;
+  height: 0.95rem;
+  flex-shrink: 0;
+  color: #5fad6a;
+  transform: translateX(-110%) scale(0.85);
+  opacity: 0;
+  transition:
+    transform 0.4s var(--ease-out),
+    opacity 0.25s ease;
+}
+
+.copyable.is-copied .copyable__tick {
+  transform: translateX(0) scale(1);
+  opacity: 1;
+  transition:
+    transform 0.45s var(--ease-out) 0.12s,
+    opacity 0.3s ease 0.12s;
+}
+
+.copyable__tick svg {
+  width: 0.95rem;
+  height: 0.95rem;
+  display: block;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .copy-toast {
-    transition: opacity 0.2s ease;
-    transform: translate(-50%, 0);
+  .copyable__aside,
+  .copyable__reveal,
+  .copyable__word,
+  .copyable__tick {
+    transition: opacity 0.2s ease !important;
   }
 
-  .copy-toast:not(.is-visible) {
-    opacity: 0;
+  .copyable__word,
+  .copyable__tick {
+    transform: none;
+  }
+
+  .copyable.is-copied .copyable__reveal {
+    max-width: 5.75rem;
   }
 }

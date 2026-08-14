@@ -68,7 +68,6 @@ export default function ContactForm() {
                 <Copyable
                   value={profile.email}
                   href={`mailto:${profile.email}`}
-                  label="Copied email"
                 >
                   {profile.email}
                 </Copyable>
@@ -171,7 +170,6 @@ export default function ContactForm() {
               value={profile.email}
               href={`mailto:${profile.email}`}
               className="contact-reach__email"
-              label="Copied email"
             >
               {profile.email}
             </Copyable>
@@ -207,7 +205,6 @@ export default function ContactForm() {
                 value={profile.phone}
                 href={`tel:${profile.phone.replace(/\s/g, '')}`}
                 className="contact-reach__link"
-                label="Copied phone"
               >
                 {profile.phone}
               </Copyable>
