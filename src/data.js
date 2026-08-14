@@ -593,11 +593,118 @@ export const certifications = [
 ]
 
 export const strengths = [
-  { label: 'Teamwork', icon: 'teamwork' },
-  { label: 'Adaptability', icon: 'adaptability' },
-  { label: 'Problem Solving', icon: 'problem' },
-  { label: 'Quick Learner', icon: 'learner' },
+  {
+    label: 'Teamwork',
+    icon: 'teamwork',
+    summary:
+      'I collaborate clearly — sharing progress, taking feedback, and keeping delivery moving with mentors, teammates, and clients.',
+    usages: [
+      {
+        project: 'Hughes Systique Corporation (HSC)',
+        context:
+          'Worked with mentors across AI, APIs, and frontend — synced on UI-to-API contracts and iterated on product-focused React workflows.',
+      },
+      {
+        project: 'DLR Info — Live Draw Results',
+        context:
+          'Partnered with the client on requirements, demos, and revisions so the live results board and admin tools matched real publishing needs.',
+      },
+      {
+        project: 'Hostel Complaint Management System',
+        context:
+          'Aligned student and admin workflows so both sides of the complaint lifecycle stayed clear and usable.',
+      },
+    ],
+  },
+  {
+    label: 'Adaptability',
+    icon: 'adaptability',
+    summary:
+      'I pick up new stacks and contexts quickly — from internship pipelines to freelance client work and course projects.',
+    usages: [
+      {
+        project: 'Hughes Systique Corporation (HSC)',
+        context:
+          'Moved across YOLO/ONNX vision work, FastAPI + Postgres backends, OpenStack Swift, and TypeScript frontends in one internship.',
+      },
+      {
+        project: 'DLR Info — Live Draw Results',
+        context:
+          'Adapted to a client brief and shipped a Next.js + Express + PostgreSQL product end-to-end for production use.',
+      },
+      {
+        project: 'WebUnix — Browser-Based OS',
+        context:
+          'Switched from typical web apps into a desktop-style browser OS with LocalStorage persistence and multi-window UX.',
+      },
+    ],
+  },
+  {
+    label: 'Problem Solving',
+    icon: 'problem',
+    summary:
+      'I break messy requirements into concrete systems — scoring logic, live inference, billing rules, and status workflows.',
+    usages: [
+      {
+        project: 'Automated Resume Scoring System',
+        context:
+          'Designed semantic similarity scoring, keyword coverage, and actionable feedback against a job description.',
+        github: 'https://github.com/29pakhilesh/Automated-Resume-Scoring-System',
+      },
+      {
+        project: 'Traffic Sign Recognition',
+        context:
+          'Trained ResNet18 and wired image + webcam inference through a FastAPI backend for live classification.',
+        github: 'https://github.com/29pakhilesh/Traffic-Sign-Recognition',
+      },
+      {
+        project: 'Parking Management System',
+        context:
+          'Modeled vehicle entry/exit, GST billing, and file-backed records in a C++ console system.',
+        github: 'https://github.com/29pakhilesh/Multi-Vehicle-Parking-Management-System',
+      },
+      {
+        project: 'Online Quiz System',
+        context:
+          'Built MCQ flow with auth, automated scoring, and instructor question management.',
+        github: 'https://github.com/29pakhilesh/Online-Quiz-System',
+      },
+    ],
+  },
+  {
+    label: 'Quick Learner',
+    icon: 'learner',
+    summary:
+      'I ramp into unfamiliar tools fast — certifications, new frameworks, and production stacks — then apply them in shipped work.',
+    usages: [
+      {
+        project: 'AWS Certified Cloud Practitioner (CLF-C02)',
+        context:
+          'Prepared and passed the official AWS exam covering EC2, S3, IAM, and cloud fundamentals.',
+      },
+      {
+        project: 'Hughes Systique Corporation (HSC)',
+        context:
+          'Learned computer vision pipelines, REST API design, and enterprise frontend patterns during the summer internship.',
+      },
+      {
+        project: 'DLR Info — Live Draw Results',
+        context:
+          'Picked up the client domain quickly and delivered a paid Next.js/Express/Postgres platform from build through use.',
+      },
+      {
+        project: 'Green Computing Dashboard',
+        context:
+          'Applied charting and sustainability-focused metrics in a React monitoring UI.',
+        github: 'https://github.com/29pakhilesh/Green-Computing-Dashboard',
+      },
+    ],
+  },
 ]
+
+export function getStrengthDetail(label) {
+  return strengths.find((s) => s.label === label) ?? null
+}
 
 export const navLinks = [
   { href: '#about', label: 'About' },

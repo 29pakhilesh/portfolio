@@ -11,6 +11,7 @@ import AvailabilityStatus from './AvailabilityStatus'
 import SkillDetailModal from './SkillDetailModal'
 import ExperienceDetailModal from './ExperienceDetailModal'
 import ProjectDetailModal from './ProjectDetailModal'
+import StrengthDetailModal from './StrengthDetailModal'
 import StrengthIcon from './StrengthIcon'
 import {
   profile,
@@ -226,7 +227,7 @@ function About() {
               {about.map((p) => (
                 <p key={p}>{p}</p>
               ))}
-              <GitHubStats />
+              <GitHubStats className="hide-on-phone" />
               <AvailabilityStatus />
             </div>
           </div>
@@ -468,7 +469,21 @@ function DeployedProjects() {
                 </div>
               </div>
               <div className="deployed__body">
-                <h4 className="deployed__name">{project.title}</h4>
+                <div className="deployed__copy">
+                  <h4 className="deployed__name">{project.title}</h4>
+                  <p className="deployed__period-inline phone-only">
+                    {project.period}
+                    {project.featured ? ' · featured' : ''}
+                  </p>
+                  <p className="deployed__desc-inline phone-only">{project.description}</p>
+                </div>
+                <ul className="deployed__icons deployed__icons--phone phone-only" aria-label={`${project.title} tech stack`}>
+                  {project.tags.map((tag) => (
+                    <li key={tag}>
+                      <SkillIcon name={resolveTechIconName(tag)} label={tag} size="sm" />
+                    </li>
+                  ))}
+                </ul>
                 <div className="deployed__links">
                   <a
                     href={project.url}
@@ -531,6 +546,7 @@ function Work() {
 
 function Skills() {
   const [selectedTech, setSelectedTech] = useState(null)
+  const [selectedStrength, setSelectedStrength] = useState(null)
 
   useEffect(() => {
     const allTech = [...skillPills, ...skills.flatMap((g) => g.items)]
@@ -586,14 +602,27 @@ function Skills() {
               <h3 className="strengths__title">Core strengths</h3>
               <div className="strengths__grid">
                 {strengths.map((s) => (
-                  <div key={s.label} className="strength-card">
+                  <button
+                    key={s.label}
+                    type="button"
+                    className="strength-card"
+                    onClick={() => setSelectedStrength(s.label)}
+                    aria-label={`Learn more about ${s.label}`}
+                  >
                     <StrengthIcon type={s.icon} />
                     <span>{s.label}</span>
-                  </div>
+                  </button>
                 ))}
               </div>
             </div>
           </div>
+
+          {selectedStrength && (
+            <StrengthDetailModal
+              strengthLabel={selectedStrength}
+              onClose={() => setSelectedStrength(null)}
+            />
+          )}
         </SectionReveal>
       </div>
     </section>
@@ -604,7 +633,7 @@ function Footer() {
   return (
     <footer className="footer container">
       <span>© {new Date().getFullYear()} {profile.name}</span>
-      <span>B.Tech CSE · JUIT · React + Vite</span>
+      <span className="hide-on-phone">B.Tech CSE · JUIT · React + Vite</span>
     </footer>
   )
 }

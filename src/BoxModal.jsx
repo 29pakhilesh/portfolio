@@ -9,6 +9,7 @@ export default function BoxModal({
   children,
   wide = false,
   extraWide = false,
+  heading = null,
 }) {
   const closeRef = useRef(null)
   useBodyScrollLock(true)
@@ -50,9 +51,11 @@ export default function BoxModal({
           </button>
         </header>
         <div className="box-modal__body">
-          <h2 id="box-modal-title" className="box-modal__heading">
-            {title}
-          </h2>
+          {heading ?? (
+            <h2 id="box-modal-title" className="box-modal__heading">
+              {title}
+            </h2>
+          )}
           {children}
         </div>
       </div>
