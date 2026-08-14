@@ -4,13 +4,14 @@ export const profile = {
   name: 'Akhilesh Panigrahi',
   title: 'B.Tech CSE Student · Ex-Intern @ HSC',
   tagline:
-    'Third-year Computer Science student at JUIT and former Summer Intern at Hughes Systique Corporation — building web apps, browser-based systems, and scalable software.',
+    'Third-year Computer Science student at JUIT and former Summer Intern at Hughes Systique Corporation — AI workflows, full-stack systems, and product frontend engineering.',
   email: '29p.akhilesh@gmail.com',
   phone: '+91 9873081614',
   location: 'Ghaziabad, India',
   resumeUrl: assetUrl('Akhilesh-Panigrahi-Resume.pdf'),
   resumeDownloadName: 'Akhilesh-Panigrahi-Resume.pdf',
   photoAbout: assetUrl('profile.png'),
+  photoHero: assetUrl('profile.png'),
   available: true,
   availabilityLabel: 'Available',
   availabilityMessage: 'Open for internships and project collaborations',
@@ -19,6 +20,14 @@ export const profile = {
     linkedin: 'https://www.linkedin.com/in/akhileshpanigrahi/',
     leetcode: 'https://leetcode.com/u/29pakhilesh/',
   },
+  githubUsername: '29pakhilesh',
+}
+
+export const githubStatsFallback = {
+  repos: 10,
+  followers: 5,
+  following: 10,
+  joined: 'Sep 2024',
 }
 
 export const stats = [
@@ -30,9 +39,9 @@ export const stats = [
 
 export const about = [
   "I'm a B.Tech Computer Science student at Jaypee University of Information Technology, passionate about software development and problem solving.",
-  'Completed a Summer Internship at Hughes Systique Corporation (HSC) from May 25 to July 24, 2026, in a hybrid role based in Gurugram.',
+  'Completed a Summer Internship at Hughes Systique Corporation (HSC) from May 25 to July 24, 2026 — learned AI & computer vision, REST APIs, full-stack systems, OpenStack Swift, and product frontend engineering.',
   'I build real-world systems — from a browser-based OS simulation to hostel complaint platforms with role-based dashboards and PostgreSQL backends.',
-  'AWS Certified Cloud Practitioner (CLF-C02). Also certified in Python, C, DSA, and Cybersecurity. Active on LeetCode and always learning new tools to ship better software.',
+  'AWS Certified Cloud Practitioner (CLF-C02). Also certified in Python, C, DSA, and Cybersecurity. Always learning new tools to ship better software.',
 ]
 
 export const experience = [
@@ -79,11 +88,13 @@ export const experience = [
     kind: 'internship',
     logo: assetUrl('logos/hsc.png'),
     summary:
-      'Completed a summer internship at Hughes Systique Corporation — a global software R&D and digital transformation company with development centers in Gurugram and Bengaluru.',
+      'Learned to build end-to-end systems across AI & computer vision, REST APIs, databases, OpenStack Swift object storage, and product-focused frontend engineering — from individual technologies to complete pipelines.',
     highlights: [
-      'Hybrid internship based in Gurugram, Haryana',
-      'Exposure to enterprise software development and engineering workflows',
-      'Worked within a CMMI Level 5 certified global technology organization',
+      'AI & computer vision — YOLO training, datasets, metrics, ONNX export, and edge deployment concepts',
+      'REST APIs — CRUD design, auth, validation, error handling, and API testing with Postman',
+      'Full-stack systems — FastAPI, PostgreSQL, React, and clear UI-to-API contracts',
+      'Product frontend — React + TypeScript AI-workflow UIs, state management, and enterprise UX',
+      'OpenStack Swift — object storage concepts: containers, objects, and cloud storage workflows',
     ],
     website: 'https://www.hsc.com/',
   },
@@ -366,10 +377,11 @@ export const projects = [
     ],
     tags: ['React', 'Node.js', 'Express', 'PostgreSQL'],
     period: 'Feb 2026 — Apr 2026',
-    accent: '#5b8def',
+    accent: '#c8c8c8',
     featured: true,
     url: 'https://hostel-complaint-system-opal.vercel.app',
     github: 'https://github.com/29pakhilesh/Hostel-Complaint-System',
+    image: assetUrl('projects/hostel-complaint.png'),
   },
   {
     title: 'WebUnix — Browser-Based OS',
@@ -382,10 +394,11 @@ export const projects = [
     ],
     tags: ['HTML', 'CSS', 'JavaScript', 'LocalStorage'],
     period: 'Dec 2025',
-    accent: '#5b8def',
+    accent: '#c8c8c8',
     featured: true,
-    url: '',
+    url: 'https://webunix.vercel.app',
     github: 'https://github.com/29pakhilesh/Webunix',
+    image: assetUrl('projects/webunix.png'),
   },
   {
     title: 'Online Quiz System',
@@ -398,10 +411,11 @@ export const projects = [
     ],
     tags: ['Web', 'Auth', 'MCQ Engine'],
     period: 'Mar 2026',
-    accent: '#5b8def',
+    accent: '#c8c8c8',
     featured: false,
     url: 'https://online-quiz-system-l94i.onrender.com',
     github: 'https://github.com/29pakhilesh/Online-Quiz-System',
+    image: assetUrl('projects/online-quiz.png'),
   },
   {
     title: 'Green Computing Dashboard',
@@ -414,10 +428,11 @@ export const projects = [
     ],
     tags: ['React', 'Data Viz', 'Sustainability'],
     period: 'Mar 2026',
-    accent: '#5b8def',
+    accent: '#c8c8c8',
     featured: false,
     url: 'https://green-computing-dashboard-mu.vercel.app',
     github: 'https://github.com/29pakhilesh/Green-Computing-Dashboard',
+    image: assetUrl('projects/green-computing.png'),
   },
   {
     title: 'Parking Management System',
@@ -430,7 +445,7 @@ export const projects = [
     ],
     tags: ['C++', 'File I/O', 'Billing'],
     period: 'Nov 2025',
-    accent: '#5b8def',
+    accent: '#c8c8c8',
     featured: false,
     url: '',
     github: 'https://github.com/29pakhilesh/Multi-Vehicle-Parking-Management-System',
@@ -446,7 +461,7 @@ export const projects = [
     ],
     tags: ['Python', 'PyPDF2', 'Automation'],
     period: 'Jun — Jul 2025',
-    accent: '#5b8def',
+    accent: '#c8c8c8',
     featured: false,
     url: '',
     github: 'https://github.com/29pakhilesh/splitter-merger-tool-for-pdfs',
@@ -462,7 +477,7 @@ export const projects = [
     ],
     tags: ['Python', 'PyTorch', 'FastAPI', 'Deep Learning'],
     period: 'May 2026',
-    accent: '#5b8def',
+    accent: '#c8c8c8',
     featured: false,
     url: '',
     github: 'https://github.com/29pakhilesh/Traffic-Sign-Recognition',
@@ -478,7 +493,7 @@ export const projects = [
     ],
     tags: ['React', 'TypeScript', 'FastAPI', 'SQLite'],
     period: 'Apr — May 2026',
-    accent: '#5b8def',
+    accent: '#c8c8c8',
     featured: false,
     url: '',
     github: 'https://github.com/29pakhilesh/Automated-Resume-Scoring-System',
