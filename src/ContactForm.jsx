@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { profile } from './data'
 import { SectionReveal } from './useScrollReveal'
 import SocialIcon from './SocialIcon'
+import { Copyable } from './CopyToast'
 
 const ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY
 
@@ -64,7 +65,14 @@ export default function ContactForm() {
             <div className="message-section__intro">
               <p className="message-section__desc">
                 Send a message — it goes straight to{' '}
-                <a href={`mailto:${profile.email}`}>{profile.email}</a>.
+                <Copyable
+                  value={profile.email}
+                  href={`mailto:${profile.email}`}
+                  label="Copied email"
+                >
+                  {profile.email}
+                </Copyable>
+                .
               </p>
               <p className="message-section__desc message-section__desc--muted">
                 Prefer email or socials? Use the channels below the form.
@@ -159,9 +167,14 @@ export default function ContactForm() {
 
           <div className="contact-reach">
             <p className="contact-reach__label">or reach me directly</p>
-            <a href={`mailto:${profile.email}`} className="contact-reach__email">
+            <Copyable
+              value={profile.email}
+              href={`mailto:${profile.email}`}
+              className="contact-reach__email"
+              label="Copied email"
+            >
               {profile.email}
-            </a>
+            </Copyable>
             <div className="contact-reach__links">
               <a
                 href={profile.social.github}
@@ -190,9 +203,14 @@ export default function ContactForm() {
               >
                 <SocialIcon name="leetcode" />
               </a>
-              <a href={`tel:${profile.phone.replace(/\s/g, '')}`} className="contact-reach__link">
+              <Copyable
+                value={profile.phone}
+                href={`tel:${profile.phone.replace(/\s/g, '')}`}
+                className="contact-reach__link"
+                label="Copied phone"
+              >
                 {profile.phone}
-              </a>
+              </Copyable>
             </div>
           </div>
         </SectionReveal>

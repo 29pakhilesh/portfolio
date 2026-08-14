@@ -30,6 +30,7 @@ import SocialLinks from './SocialLinks'
 import GitHubStats from './GitHubStats'
 import { useUiMotion, ScrollProgress, StatCounter, TypeLine } from './UiMotion'
 import { useBodyScrollLock } from './useBodyScrollLock'
+import { CopyToastProvider, Copyable } from './CopyToast'
 import './App.css'
 import './Coder.css'
 
@@ -204,13 +205,23 @@ function About() {
               <ul className="about__contact-list">
                 <li>
                   <span>email</span>
-                  <a href={`mailto:${profile.email}`}>{profile.email}</a>
+                  <Copyable
+                    value={profile.email}
+                    href={`mailto:${profile.email}`}
+                    label="Copied email"
+                  >
+                    {profile.email}
+                  </Copyable>
                 </li>
                 <li>
                   <span>phone</span>
-                  <a className="is-copyable" href={`tel:${profile.phone.replace(/\s/g, '')}`}>
+                  <Copyable
+                    value={profile.phone}
+                    href={`tel:${profile.phone.replace(/\s/g, '')}`}
+                    label="Copied phone"
+                  >
                     {profile.phone}
-                  </a>
+                  </Copyable>
                 </li>
                 <li>
                   <span>base</span>
@@ -644,19 +655,21 @@ export default function App() {
   useUiMotion()
 
   return (
-    <div className="app">
-      <ScrollProgress />
-      <LiveBackground />
-      <Nav />
-      <main>
-        <Hero />
-        <About />
-        <Experience />
-        <Work />
-        <Skills />
-        <ContactForm />
-      </main>
-      <Footer />
-    </div>
+    <CopyToastProvider>
+      <div className="app">
+        <ScrollProgress />
+        <LiveBackground />
+        <Nav />
+        <main>
+          <Hero />
+          <About />
+          <Experience />
+          <Work />
+          <Skills />
+          <ContactForm />
+        </main>
+        <Footer />
+      </div>
+    </CopyToastProvider>
   )
 }
