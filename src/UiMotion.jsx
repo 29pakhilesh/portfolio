@@ -70,7 +70,12 @@ export function StatCounter({ value }) {
   }, [value, isNumeric])
 
   return (
-    <span ref={ref} className="stat__value" aria-hidden="true">
+    <span
+      ref={ref}
+      className="stat__value"
+      aria-hidden="true"
+      style={isNumeric ? { minWidth: `${String(value).length}ch` } : undefined}
+    >
       {display}
     </span>
   )
@@ -106,9 +111,17 @@ export function TypeLine({ text, className = '', as: Tag = 'span', delay = 0 }) 
   }, [text, delay])
 
   return (
-    <Tag className={`${className}${done ? ' is-typed' : ''}`}>
-      {out}
-      {!done && <span className="type-caret" aria-hidden="true" />}
+    <Tag
+      className={`type-line ${className}${done ? ' is-typed' : ''}`.trim()}
+      aria-label={text}
+    >
+      <span className="type-line__sizer" aria-hidden="true">
+        {text}
+      </span>
+      <span className="type-line__live" aria-hidden="true">
+        {out}
+        {!done && <span className="type-caret" />}
+      </span>
     </Tag>
   )
 }

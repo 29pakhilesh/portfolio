@@ -11,6 +11,8 @@ const LINES = [
   '}',
 ]
 
+const FULL = LINES.join('\n')
+
 export default function CodeWindow() {
   const [shown, setShown] = useState(0)
   const [blink, setBlink] = useState(true)
@@ -19,16 +21,15 @@ export default function CodeWindow() {
   useEffect(() => {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (reduced) {
-      setShown(LINES.join('\n').length)
+      setShown(FULL.length)
       return
     }
 
-    const full = LINES.join('\n')
     let i = 0
     const t = setInterval(() => {
       i += 1
       setShown(i)
-      if (i >= full.length) {
+      if (i >= FULL.length) {
         clearInterval(t)
         setTimeout(() => {
           setShown(0)
@@ -44,8 +45,7 @@ export default function CodeWindow() {
     return () => clearInterval(t)
   }, [])
 
-  const full = LINES.join('\n')
-  const text = full.slice(0, shown)
+  const text = FULL.slice(0, shown)
 
   return (
     <div className="code-window" aria-hidden="true">
@@ -54,7 +54,9 @@ export default function CodeWindow() {
         <img src={assetUrl('gifs/eq.gif')} alt="" className="code-window__gif" width={88} height={28} />
       </div>
       <pre className="code-window__body">
-        <code>
+        {/* Invisible full snippet locks height so typing never reflows the page */}
+        <code className="code-window__sizer">{FULL}█</code>
+        <code className="code-window__live">
           {text}
           <span className={`code-window__cursor${blink ? ' is-on' : ''}`}>█</span>
         </code>
