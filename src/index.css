@@ -18,6 +18,11 @@
   --accent-3: #a8a49c;
   --accent-dim: rgba(242, 239, 232, 0.06);
   --on-accent: #050505;
+  --violet: #3b0070;
+  --violet-deep: #2a0052;
+  --violet-border: #5a1a9e;
+  --violet-soft: #14081f;
+  --violet-glow: rgba(90, 26, 158, 0.28);
   --error: #f87171;
   --surface: #0c0c0c;
   --surface-2: #0e0e0e;
