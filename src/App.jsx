@@ -428,6 +428,7 @@ function ProjectCard({ project, onSelect }) {
 }
 
 function DeployedProjects() {
+  const [selectedProject, setSelectedProject] = useState(null)
   const deployed = projects.filter((p) => p.url && p.image)
   if (deployed.length === 0) return null
 
@@ -450,6 +451,12 @@ function DeployedProjects() {
                   loading="lazy"
                   width={1024}
                   height={640}
+                />
+                <button
+                  type="button"
+                  className="deployed__media-hit phone-only"
+                  onClick={() => setSelectedProject(project)}
+                  aria-label={`Open links for ${project.title}`}
                 />
                 <div className="deployed__slide">
                   <p className="deployed__period">
@@ -520,6 +527,13 @@ function DeployedProjects() {
           )
         })}
       </div>
+
+      {selectedProject && (
+        <ProjectDetailModal
+          project={selectedProject}
+          onClose={() => setSelectedProject(null)}
+        />
+      )}
     </div>
   )
 }
