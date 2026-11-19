@@ -4,7 +4,7 @@ export const profile = {
   name: 'Akhilesh Panigrahi',
   title: 'B.Tech CSE Student · Ex-Intern @ HSC',
   tagline:
-    'Third-year Computer Science student at JUIT and former Summer Intern at Hughes Systique Corporation — AI workflows, full-stack systems, and product frontend engineering.',
+    'Third-year computer science student at JUIT and former summer intern at Hughes Systique. I build full-stack products end to end: a paid client platform, a hostel complaint system, and an operating system that runs in a browser tab.',
   email: '29p.akhilesh@gmail.com',
   phone: '+91 9873081614',
   location: 'Ghaziabad, India',
@@ -14,7 +14,7 @@ export const profile = {
   photoHero: assetUrl('profile.png'),
   available: true,
   availabilityLabel: 'Available',
-  availabilityMessage: 'Open for internships and project collaborations',
+  availabilityMessage: 'Open to internships and freelance projects',
   social: {
     github: 'https://github.com/29pakhilesh',
     linkedin: 'https://www.linkedin.com/in/akhileshpanigrahi/',
@@ -31,17 +31,17 @@ export const githubStatsFallback = {
 }
 
 export const stats = [
-  { value: '15', label: 'Technologies', href: '#skills' },
+  { value: '16', label: 'Technologies', href: '#skills' },
   { value: '6', label: 'Certifications', href: '#skills' },
   { value: '9', label: 'Projects built', href: '#work' },
   { value: '2028', label: 'Graduating', href: '#about' },
 ]
 
 export const about = [
-  "I'm a B.Tech Computer Science student at Jaypee University of Information Technology, passionate about software development and problem solving.",
-  'Completed a Summer Internship at Hughes Systique Corporation (HSC) from May 25 to July 24, 2026 — learned AI & computer vision, REST APIs, full-stack systems, OpenStack Swift, and product frontend engineering.',
-  'I build real-world systems — from a browser-based OS simulation to hostel complaint platforms with role-based dashboards and PostgreSQL backends.',
-  'AWS Certified Cloud Practitioner (CLF-C02). Also certified in Python, C, DSA, and Cybersecurity. Always learning new tools to ship better software.',
+  "I'm Akhilesh, a third-year B.Tech computer science student at Jaypee University of Information Technology in Waknaghat, Himachal Pradesh. I like building complete systems, from the database up to the screen people use.",
+  'In summer 2026 I interned at Hughes Systique Corporation, where I learned computer vision with YOLO, REST API design with FastAPI and PostgreSQL, OpenStack Swift object storage, and React and TypeScript frontends for AI workflows.',
+  'Since July 2026 I have been freelancing for DLR Info, building and maintaining their live draw-results platform as a paid client project.',
+  'I am an AWS Certified Cloud Practitioner (CLF-C02), with certifications in Python, C, data structures, and cybersecurity. I graduate in 2028.',
 ]
 
 export const experience = [
@@ -213,7 +213,7 @@ export const techDetails = {
       },
       {
         project: 'This portfolio',
-        context: 'Built with React 19 and Vite — sections, theme toggle, scroll reveals, and contact form.',
+        context: 'Built with React 19 and Vite — project showcase, skill explorer, and contact form.',
       },
     ],
   },
@@ -275,7 +275,7 @@ export const techDetails = {
       },
       {
         project: 'This portfolio',
-        context: 'Golden theme variables, light/dark mode, scroll reveals, and responsive project grid.',
+        context: 'Custom properties, striped section bands, container-query type, and responsive layouts.',
       },
     ],
   },
@@ -706,10 +706,12 @@ export function getStrengthDetail(label) {
   return strengths.find((s) => s.label === label) ?? null
 }
 
+// Same order as the sections appear on the page. `jp` is the Japanese word
+// dyed onto each panel of the noren (the curtain menu at the top).
 export const navLinks = [
-  { href: '#about', label: 'About' },
-  { href: '#experience', label: 'Experience' },
-  { href: '#work', label: 'Projects' },
-  { href: '#skills', label: 'Skills' },
-  { href: '#contact', label: 'Contact' },
+  { href: '#about', label: 'About', jp: '紹介' },
+  { href: '#work', label: 'Projects', jp: '作品' },
+  { href: '#experience', label: 'Experience', jp: '経歴' },
+  { href: '#skills', label: 'Skills', jp: '技術' },
+  { href: '#contact', label: 'Contact', jp: '連絡' },
 ]
